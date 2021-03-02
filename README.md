@@ -28,4 +28,4 @@ This repository is a solo consolidation project in Javascript. We have to create
     This is a two player game so it only accept two player. After creating two players click the 
 
 ## Credits
-- (CraftPix.net)[https://craftpix.net/]
+- [CraftPix.net](https://craftpix.net/)
