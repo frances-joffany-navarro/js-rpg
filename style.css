@@ -1,0 +1,50 @@
+.selector-for-some-widget {box-sizing: content-box;}
+
+body{
+    background: url(images/platformer_background_4.png);
+    background-position:center left;
+    background-size:contain;
+    height: 100vh;
+    font-family: 'Black Ops One', cursive;
+    text-align: center;    
+}
+
+#player1Stat, #player2Stat{
+  text-align: left;
+}
+h2{color: #2CA090;
+  font-family: 'DotGothic16', sans-serif;}
+p{
+  color: #493030;
+  font-weight: bold;
+  font-family: 'Black Ops One', cursive;
+}
+h3{font-family: 'DotGothic16', sans-serif;}
+
+label{color: white;}
+
+#characterInputs select, #characterInputs input{
+  background-color: rgb(168, 49, 49);
+  color: white;
+  font-family: 'DotGothic16', sans-serif;
+}
+
+#creationPanel button, #startPanel button{
+  background-color: rgb(44, 160, 144);
+  color: white;
+  font-family: 'DotGothic16', sans-serif;
+}
+
+#firstPanel{background: rgba(220, 255, 254, 0.5);}
+#secondPanel{background:rgba(105, 204, 215, 0.5);}
+#logPanel, #movesPanel, #startPanel{display: none;}
+
+#p1Health,#p2Health{
+  animation-name: fullHealth;
+  animation-duration: 4s;
+}
+/*Keyframes*/
+@keyframes fullHealth{
+  from{width: 0%;}
+  to{width: 100%;}
+}
