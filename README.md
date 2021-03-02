@@ -27,3 +27,4 @@ This repository is a solo consolidation project in Javascript. We have to create
 
 ## Credits
 - [CraftPix.net](https://craftpix.net/)
+- Icons made by [Smashicons](https://www.flaticon.com/authors/smashicons)
