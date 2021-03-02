@@ -23,9 +23,7 @@ This repository is a solo consolidation project in Javascript. We have to create
 ## Prototype
 [https://www.figma.com/proto/Y0zVNJzo2cLULddnMm6wMR/RPG-Challenge?node-id=1%3A2&viewport=188%2C118%2C0.26779454946517944&scaling=scale-down](https://www.figma.com/proto/Y0zVNJzo2cLULddnMm6wMR/RPG-Challenge?node-id=1%3A2&viewport=188%2C118%2C0.26779454946517944&scaling=scale-down)
 
-## How to play the game
-- Create Players 
-    This is a two player game so it only accept two player. After creating two players click the 
+## How to play the game - Coming soon 
 
 ## Credits
 - [CraftPix.net](https://craftpix.net/)
