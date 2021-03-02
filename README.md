@@ -2,7 +2,8 @@
 
 This repository is a solo consolidation project in Javascript. We have to create a RPG game that creates player, create game logic based on the instruction link and to log the players activity.
   
-## The Game - coming soon
+## The Game
+[https://frances-joffany-navarro.github.io/js-rpg/](https://frances-joffany-navarro.github.io/js-rpg/)
 
 ## Instruction Link
 [https://github.com/becodeorg/BXL-Swartz-4-27/tree/master/2.The-Hill/1.Javascript/rpg-project](https://github.com/becodeorg/BXL-Swartz-4-27/tree/master/2.The-Hill/1.Javascript/rpg-project)
