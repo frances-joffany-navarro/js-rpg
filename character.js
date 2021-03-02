@@ -31,16 +31,17 @@ function Person(race,item){
 //add vs in the canvas
 var canvas = document.getElementById("visual");
 var ctx = canvas.getContext("2d");
-ctx.font = "60px Black Ops One "; /* Arial Black Bernard MT Condensed */
+ctx.font = "60px Arial Black"; /* Arial Black Bernard MT Condensed */
 ctx.fillStyle = "#ffffff"; /*e3cc54*/
 ctx.textAlign = "center";
 ctx.fillText("VS", canvas.width/2, canvas.height/2 + 30);
-//Create a  Player
-create.addEventListener("click", createAvatar);
+
+//Create a Player
+create.addEventListener("click", createPlayer);
 //Start game
 start.addEventListener("click", startGame);
 
-function createAvatar() {
+function createPlayer() {
     countPlayer++;
     //console.log(countPlayer);
     //create 2 player only
@@ -53,7 +54,6 @@ function createAvatar() {
         var character = {"name": playerName, "race": playerRace, "item": playerItem}
         //add the object into array
         players.push(character);
-        //set player 2
         
         switch (countPlayer) {
             case 1:
@@ -76,7 +76,7 @@ function createAvatar() {
                 var result = player2.displayChar();
                 break;
             default:
-                console.log("Invalid");
+                console.log("Invalid value");
                 break;
         }
     }else{
