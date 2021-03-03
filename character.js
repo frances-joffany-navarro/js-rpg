@@ -31,7 +31,7 @@ function Person(race,item){
 //add vs in the canvas
 var canvas = document.getElementById("visual");
 var ctx = canvas.getContext("2d");
-ctx.font = "60px Arial Black"; /* Arial Black Bernard MT Condensed */
+ctx.font = "60px Black Ops One"; /* Arial Black Bernard MT Condensed */
 ctx.fillStyle = "#ffffff"; /*e3cc54*/
 ctx.textAlign = "center";
 ctx.fillText("VS", canvas.width/2, canvas.height/2 + 30);
