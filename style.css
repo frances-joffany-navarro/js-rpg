@@ -12,8 +12,11 @@ body{
 #player1Stat, #player2Stat{
   text-align: left;
 }
-h2{color: #2CA090;
-  font-family: 'DotGothic16', sans-serif;}
+h2{
+  color: #2CA090;
+  font-family: 'DotGothic16', sans-serif;
+}
+
 p{
   color: #493030;
   font-weight: bold;
@@ -38,13 +41,10 @@ label{color: white;}
 #firstPanel{background: rgba(220, 255, 254, 0.5);}
 #secondPanel{background:rgba(105, 204, 215, 0.5);}
 #logPanel, #movesPanel, #startPanel{display: none;}
+#player1Stat,#player2Stat{visibility: hidden;}
 
-#p1Health,#p2Health{
-  animation-name: fullHealth;
-  animation-duration: 4s;
-}
-/*Keyframes*/
-@keyframes fullHealth{
-  from{width: 0%;}
-  to{width: 100%;}
+ul{
+  list-style: none;
+  padding-left: 0;
+  font-family:'Courier New', Courier, monospace
 }
