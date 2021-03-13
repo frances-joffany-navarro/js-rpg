@@ -1,5 +1,7 @@
-
-var create = document.getElementById("create"),
+var create1 = document.getElementById("create1"),
+    create2 = document.getElementById("create2"),
+    formPlayer1 = document.getElementById("formPlayer1"),
+    formPlayer2 = document.getElementById("formPlayer2"),
     logPanel =  document.getElementById("logPanel"),
     movesPanel = document.getElementById("movesPanel"),
     createPanel = document.getElementById("creationPanel"),
@@ -9,23 +11,38 @@ var create = document.getElementById("create"),
     player2Stat = document.getElementById("player2Stat"),
     p1Health = document.getElementById("p1Health"),
     p2Health = document.getElementById("p2Health"),
-    countClick = 0,
+    hit1 = document.getElementById("hit1"),
+    heal1 = document.getElementById("heal1"),
+    yield1 = document.getElementById("yield1"),
+    hit2 = document.getElementById("hit2"),
+    heal2 = document.getElementById("heal2"),
+    yield2 = document.getElementById("yield2"),
+    counter = 0,
     players = [],
-    player1, player2;
+    player1, player2, playerTurn = 1, gameState = "creating";
 
 function Person(race,item){
     this.race = race;
     this.item = item;
-    this.currenthealth = 50;
+    this.currenthealth = 100;
     this.maxHealth = 100;
     
     this.min = 3;
     this.maxDamage = 20;
     this.maxHealing = 30;
 
-    this.heal = function(){};
+    this.chance = 1;
 
-    this.damage = function(){};
+    this.heal = function(){
+        //console.log(Math.floor(Math.random() * (this.maxHealing - this.min + 1)) + this.min);
+        return Math.floor(Math.random() * (this.maxHealing - this.min + 1)) + this.min;     
+    };
+
+    this.damage = function(){
+        //console.log(Math.floor(Math.random() * (this.maxDamage - this.min + 1)) + this.min);
+        result = Math.floor(Math.random() * (this.maxDamage - this.min + 1)) + this.min;
+        return result
+    };
 
     this.totalDamage = this.damage();
 
@@ -34,106 +51,153 @@ function Person(race,item){
     };
 }
 
+/*var player1 = new Person("human","boots");
+var player2 = new Person("human","boots");
+var d1,d2,d3;
+console.log(d1 = player1.damage());
+console.log(d2 = player1.damage());
+console.log(d3 = player1.damage());
+console.log(d1);
+console.log(d2);
+console.log(d);
+console.log(player1.totalDamage);
+//console.log(player2.damage());
+//console.log(player2.damage());
+console.log("\n");*/
 
-//add vs in the canvas
-var canvas = document.getElementById("visual");
-var ctx = canvas.getContext("2d");
-ctx.font = "60px Black Ops One"; /* Arial Black Bernard MT Condensed */
-ctx.fillStyle = "#ffffff"; /*e3cc54*/
-ctx.textAlign = "center";
-ctx.fillText("VS", canvas.width/2, canvas.height/2 + 30);
-//ctx.drawImage(img, 10, 10);
+//attack();
 
-//Create a Player
-create.addEventListener("click", createPlayer);
-//Start game
+create1.addEventListener("click", getInputP1);
+create2.addEventListener("click", getInputP2);
+console.log(players);
 start.addEventListener("click", startGame);
 
-function createPlayer() {
-    //get the inputs
-    var playerName = document.getElementById("playerName").value;
-    var playerRace = document.getElementById("races").value;
-    var playerItem = document.getElementById("items").value;
-    
-    //validation
-    if(playerName.trim() != "" && playerRace != "" && playerItem != ""){
-        countClick++;
-        if(countClick <= 2){            
-            //create object and put value of the inputs
-            var character = {"name": playerName, "race": playerRace, "item": playerItem}
-            //add the object into array
-            players.push(character);
+function getInputP1() {
+    //save Player1 input
+    var playerName1 = document.getElementById("playerName1").value;
+    var playerRace1 = document.getElementById("races1").value;
+    var playerItem1 = document.getElementById("items1").value;
 
-            switch (countClick) {
-                case 1:
-                    //initiate new player
-                    player1 = new Person(players[0].race,players[0].item);
-                    //display Character in console
-                    player1.displayChar();
-                    //document.getElementById("logPanel").append("result");
-                    //prep for to create player 2
-                    document.getElementById("desc").innerHTML = "Player 2";
-                    //clear input value;
-                    break;
-                
-                case 2:
-                    //initiate new player
-                    player2 = new Person(players[1].race,players[1].item);
-                    //display Character in console
-                    player2.displayChar();
-                    //show Start Panel
-                    startPanel.style.display = "block" ;
-                    //hide creation panel
-                    createPanel.style.display = "none" ;
-                    break;
+    if(playerName1.trim() != "" && playerRace1 != "" && playerItem1 != ""){
+        //create object and put value of the inputs
+        var character = {"name": playerName1, "race": playerRace1, "item": playerItem1}
+        //add the object into array
+        players.push(character);
+        //player1 = new Person(players[0].race,players[0].item); 
+        //add input in an object
+        //console.log(playerName1 + " " + playerRace1 + " " + playerItem1);
 
-                default:
-                    console.log("No equivalence");
-                    break;
-            }
-        }else{
-            console.log("Players are complete");
-        } 
-        document.getElementById("playerName").value = "";
-        document.getElementById("races").value = "";
-        document.getElementById("items").value = "";
-        //document.getElementById("playerName").autofocus = true;
+        formPlayer1.style.display = "none";
+        formPlayer2.style.display = "block";
     }else{
-        console.log("There is an empty value. Please check your input.");
+        console.log("There is an empty value. Please check your inputs");
+    }          
+}
+
+function getInputP2() {
+    //save Player2 input
+    var playerName2 = document.getElementById("playerName2").value;
+    var playerRace2 = document.getElementById("races2").value;
+    var playerItem2 = document.getElementById("items2").value;
+
+    if(playerName2.trim() != "" && playerRace2 != "" && playerItem2 != ""){
+        //create object and put value of the inputs
+        var character = {"name": playerName2, "race": playerRace2, "item": playerItem2}
+        //add the object into array
+        players.push(character);
+        //console.log(playerName2 + " " + playerRace2 + " " + playerItem2);
+        //player2 = new Person(players[1].race,players[1].item);
+        //show Start Panel
+        startPanel.style.display = "block" ;
+        //hide creation panel
+        createPanel.style.display = "none" ;
+    }else{
+        console.log("There is an empty value. Please check your inputs");
+    }     
+}
+
+function createStat(){
+    //create character
+    player1 = new Person(players[0].race,players[0].item);
+    player2 = new Person(players[1].race,players[1].item);
+
+    if(gameState == "creating"){
+        player = player1;
+        opponent = player2;
+        console.log("Player1");
+        races();
+        items();
+        player1 = player;
+        
+        player = player2;
+        opponent = player1;
+        console.log("Player2");
+        races();
+        items();
+        player2 = player;
     }
-    
-/*document.getElementById("p1Health").animate([
-    {width: "" + player1.maxHealth + "%"},
-    {width: "" + player1.currenthealth + "%"},
-],{
-    duration: 3000,
-});*/
+
+    gameState = "attacking";
+
+    console.log("Player1 Stat: " + 
+        "\n Race: " + player1.race + 
+        "\n Item: " + player1.item + 
+        "\n Current Health: " + player1.currenthealth +
+        "\n Max Health: " +  player1.maxHealth + 
+        "\n Max Healing: " +  player1.maxHealing + 
+        "\n Max Damage: " +  player1.maxDamage + 
+        "\n Heal: " + player1.heal() + 
+        "\n Damage: " + player1.totalDamage +
+        "\n Chance: " + player1.chance);
+
+    console.log("PLayer2 Stat: " + 
+        "\n Race: " + player2.race + 
+        "\n Item: " + player2.item + 
+        "\n Current Health: " + player2.currenthealth +
+        "\n Max Health: " +  player2.maxHealth + 
+        "\n Max Healing: " +  player2.maxHealing + 
+        "\n Max Damage: " +  player2.maxDamage + 
+        "\n Heal: " + player2.heal() + 
+        "\n Damage: " + player2.totalDamage +
+        "\n Chance: " + player2.chance);                
 }
 
 function startGame(){
+    var gameOver = false;
+    createStat();
+    addLogs("Player 1 will make the first move");
+    
     //Show log and move panel
     logPanel.style.display = "block";
     movesPanel.style.display = "block";
 
     //Hide create panel
     startPanel.style.display = "none";
-    player1Stat.style.visibility = "visible";
-    player2Stat.style.visibility = "visible";
-
-    //Animation
-    healthAnimation(0, 100, p1Health);
-    healthAnimation(0, 100, p2Health);
 
     //show players name
     document.getElementById("showName1").innerHTML = players[0].name;
     document.getElementById("showName2").innerHTML = players[1].name;
 
-    //show item image
-    players.forEach(showImages);
+    //Show player health bar
+    player1Stat.style.visibility = "visible";
+    player2Stat.style.visibility = "visible";
 
-    //show race image
-    //player
-        
+    p1Health.setAttribute("style", "width:" + player1.maxHealth + "%" );
+    p2Health.setAttribute("width", "width:" + player2.maxHealth + "%" );
+    p1Health.setAttribute("aria-valuemax", player1.maxHealth + "" );
+    p2Health.setAttribute("aria-valuemax", player2.maxHealth + "" );
+
+    //Animation
+    healthAnimation(0, player1.maxHealth, p1Health);
+    healthAnimation(0, player2.maxHealth, p2Health);
+    
+    p1Health.innerHTML = player1.currenthealth + " / " + player1.maxHealth;
+    p2Health.innerHTML = player2.currenthealth + " / " + player2.maxHealth;
+    
+    //show race and item image
+    players.forEach(showImages); 
+
+    turn();
 }
 
 function showImages(value,index){    
@@ -203,18 +267,27 @@ function showImages(value,index){
     }
 }
 
-function healthAnimation(current, max, player){
+function healthAnimation(current, change, player){
     player.animate([
-        {width: "" + current + "%"},
-        {width: "" + max + "%"},        
+        {width: current + "%"},
+        {width: change + "%"},        
     ],{
         duration: 1000,
         fill: "forwards",
     });
 }
 
-function addLogs(player,move){
+function addLogs(msg){
     var list = document.createElement("li");
-    list.append(player + ": " + move); 
+    list.append(msg); 
     document.getElementById("logs").appendChild(list);
 }
+
+//add vs in the canvas
+var canvas = document.getElementById("visual");
+var ctx = canvas.getContext("2d");
+ctx.font = "60px Black Ops One"; /* Arial Black Bernard MT Condensed */
+ctx.fillStyle = "#ffffff"; /*e3cc54*/
+ctx.textAlign = "center";
+ctx.fillText("VS", canvas.width/2, canvas.height/2 + 30);
+//ctx.drawImage(img, 10, 10);
