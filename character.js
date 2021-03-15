@@ -19,7 +19,7 @@ var create1 = document.getElementById("create1"),
     yield2 = document.getElementById("yield2"),
     counter = 0,
     players = [],
-    player1, player2, playerTurn = 1, gameState = "creating";
+    player1, player2, playerTurn = 1, gameState = "creating", gameOver = false;
 
 function Person(race,item){
     this.race = race;
@@ -34,12 +34,10 @@ function Person(race,item){
     this.chance = 1;
 
     this.heal = function(){
-        //console.log(Math.floor(Math.random() * (this.maxHealing - this.min + 1)) + this.min);
-        return Math.floor(Math.random() * (this.maxHealing - this.min + 1)) + this.min;     
+        return Math.floor(Math.random() * (this.maxHealing - this.min + 1)) + this.min;   
     };
 
     this.damage = function(){
-        //console.log(Math.floor(Math.random() * (this.maxDamage - this.min + 1)) + this.min);
         result = Math.floor(Math.random() * (this.maxDamage - this.min + 1)) + this.min;
         return result
     };
@@ -51,25 +49,8 @@ function Person(race,item){
     };
 }
 
-/*var player1 = new Person("human","boots");
-var player2 = new Person("human","boots");
-var d1,d2,d3;
-console.log(d1 = player1.damage());
-console.log(d2 = player1.damage());
-console.log(d3 = player1.damage());
-console.log(d1);
-console.log(d2);
-console.log(d);
-console.log(player1.totalDamage);
-//console.log(player2.damage());
-//console.log(player2.damage());
-console.log("\n");*/
-
-//attack();
-
 create1.addEventListener("click", getInputP1);
 create2.addEventListener("click", getInputP2);
-console.log(players);
 start.addEventListener("click", startGame);
 
 function getInputP1() {
@@ -83,9 +64,6 @@ function getInputP1() {
         var character = {"name": playerName1, "race": playerRace1, "item": playerItem1}
         //add the object into array
         players.push(character);
-        //player1 = new Person(players[0].race,players[0].item); 
-        //add input in an object
-        //console.log(playerName1 + " " + playerRace1 + " " + playerItem1);
 
         formPlayer1.style.display = "none";
         formPlayer2.style.display = "block";
@@ -105,8 +83,6 @@ function getInputP2() {
         var character = {"name": playerName2, "race": playerRace2, "item": playerItem2}
         //add the object into array
         players.push(character);
-        //console.log(playerName2 + " " + playerRace2 + " " + playerItem2);
-        //player2 = new Person(players[1].race,players[1].item);
         //show Start Panel
         startPanel.style.display = "block" ;
         //hide creation panel
@@ -137,8 +113,6 @@ function createStat(){
         player2 = player;
     }
 
-    gameState = "attacking";
-
     console.log("Player1 Stat: " + 
         "\n Race: " + player1.race + 
         "\n Item: " + player1.item + 
@@ -162,10 +136,14 @@ function createStat(){
         "\n Chance: " + player2.chance);                
 }
 
-function startGame(){
-    var gameOver = false;
+function startGame(){    
     createStat();
     addLogs("Player 1 will make the first move");
+
+    //disable the buttons for player2        
+    hit2.disabled = true;
+    heal2.disabled = true;
+    yield2.disabled = true;
     
     //Show log and move panel
     logPanel.style.display = "block";
@@ -195,9 +173,7 @@ function startGame(){
     p2Health.innerHTML = player2.currenthealth + " / " + player2.maxHealth;
     
     //show race and item image
-    players.forEach(showImages); 
-
-    turn();
+    players.forEach(showImages);    
 }
 
 function showImages(value,index){    
@@ -267,10 +243,10 @@ function showImages(value,index){
     }
 }
 
-function healthAnimation(current, change, player){
-    player.animate([
-        {width: current + "%"},
-        {width: change + "%"},        
+function healthAnimation(from, to, id){
+    id.animate([
+        {width: from + "%"},
+        {width: to + "%"},        
     ],{
         duration: 1000,
         fill: "forwards",
@@ -290,4 +266,3 @@ ctx.font = "60px Black Ops One"; /* Arial Black Bernard MT Condensed */
 ctx.fillStyle = "#ffffff"; /*e3cc54*/
 ctx.textAlign = "center";
 ctx.fillText("VS", canvas.width/2, canvas.height/2 + 30);
-//ctx.drawImage(img, 10, 10);

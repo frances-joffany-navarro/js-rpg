@@ -29,16 +29,16 @@ console.log("Opponent Stat: " +
             "\n Damage: " + opponent.totalDamage +
             "\n Chance: " + opponent.chance);*/
 
-//function handles races !! only run once
+//function handles races 
 function races(){
     switch(player.race){
         case "human":
             if(gameState == "attacking"){
                 //20% less damage taken
-                console.log("Original Hit: " + opponent.totalDamage);
-                console.log("20% less: " + opponent.totalDamage * 0.2);
+                //console.log("Original Hit: " + opponent.totalDamage);
+                //console.log("20% less: " + opponent.totalDamage * 0.2);
                 opponent.totalDamage -= parseInt(opponent.totalDamage * 0.2);
-                addLogs("");
+                console.log("A human will take 20% less damage");
             }else{
                 console.log("no effect");
                 return;
@@ -47,11 +47,12 @@ function races(){
 
         case "orc":
             if(gameState == "creating"){
-                console.log("Max Health: " + player.maxHealth);
-                console.log("40%+: " + player.maxHealth * 0.4);
+                /*console.log("Max Health: " + player.maxHealth);
+                console.log("40%+: " + player.maxHealth * 0.4);*/
                 //40% more max health
                 player.maxHealth += parseInt(player.maxHealth * 0.4);
                 player.currenthealth = player.maxHealth;
+                console.log("The Orc will have 40% max health");
             }else{
                 console.log("no effect");
                 return;
@@ -69,15 +70,17 @@ function races(){
                 console.log("#: " + rdm);
                 //player.damage();
                 if(rdm <= (100 * 0.3)){
-                    console.log("Orig Hit: " + player.totalDamage);
-                    console.log("50% Hit: " + opponent.totalDamage * 0.5);
+                    //console.log("Orig Hit: " + player.totalDamage);
+                    //console.log("50% Hit: " + opponent.totalDamage * 0.5);
                     player.totalDamage = parseInt(opponent.totalDamage * 0.5);
                     opponent.currenthealth -= player.totalDamage;
                     opponent.totalDamage = 0;
-                    console.log("Player deflect your attack. You recieve the damage.");
+                    console.log("The elf deflect back the 50% of the damage to the opponent.");
+                    addLogs("but opponent deflect back your attack and received no damage.");
                 }else{
-                    console.log("Orig Hit: " + opponent.totalDamage);
+                    //console.log("Orig Hit: " + opponent.totalDamage);
                     opponent.totalDamage;
+                    console.log("The elf CANNOT deflect back the attack to the opponent.");
                 }
             }else{
                 console.log("no effect");
@@ -90,8 +93,9 @@ function races(){
             if(gameState == "turning"){
                 console.log("Orig Hit: " + opponent.totalDamage);
                 console.log("Lifesteal: " + player.currenthealth * 0.1);
-                console.log("Lifesteal: " + player.currenthealth * 0.1);
+                //console.log("Lifesteal: " + player.currenthealth * 0.1);
                 opponent.totalDamage = parseInt(player.currenthealth * 0.1);
+                addLogs("Your opponent did a lifesteal on you.");
             }else{
                 console.log("no effect");
                 return;
@@ -114,10 +118,12 @@ function items() {
                 var rdm = Math.floor(Math.random() * 100) + 1;
                 console.log("#: " + rdm);
                 if(rdm <= (100 * 0.3)){                
-                    console.log("The player dodge the attack of the opponent");
+                    console.log("Your opponent dodge your attack.");
+                    addLogs("but opponent dodge your attack"); 
                     opponent.totalDamage = 0;
                 }else{
-                    console.log("The player received " + opponent.totalDamage + " from the opponent");
+                    console.log("Your opponent received " + opponent.totalDamage + " damage.");
+                    //addLogs("and opponent received the ");
                     opponent.totalDamage;
                 }
                 
@@ -130,9 +136,10 @@ function items() {
         case "staff":    
             //20% increase in healing
             if(gameState == "creating"){
-                console.log("Max Healing: " + player.maxHealing);  
-                console.log("20%+ : " + player.maxHealing * 0.2);   
+                //console.log("Max Healing: " + player.maxHealing);  
+                //console.log("20%+ : " + player.maxHealing * 0.2);   
                 player.maxHealing += parseInt(player.maxHealing * 0.2);
+                console.log("The players max healing increased 20%");
             }else{
                 console.log("no effect");
                 return;
@@ -142,8 +149,9 @@ function items() {
         case "sword":
             //30% more damage
             if(gameState == "creating"){
-                console.log("Max Damage: " + player.maxDamage);  
-                console.log("30%+ : " + player.maxDamage * 0.3);
+                //console.log("Max Damage: " + player.maxDamage);  
+                //console.log("30%+ : " + player.maxDamage * 0.3);
+                console.log("The players max damage increased 30%");
                 player.maxDamage += parseInt(player.maxDamage * 0.3);
             }else{
                 console.log("no effect");
@@ -176,40 +184,50 @@ function items() {
 }
 
 function turn(){
-    player.totalDamage = player.damage();
-    opponent.totalDamage = opponent.damage()
-    gameState == "turning";
-    if(playerTurn == 1){        
-        player = player2;
-        opponent = player1;
-        if(opponent.race == "vampire"){
-            races();
-            var oldHealth = player.currenthealth;        
-            player.currenthealth -= opponent.totalDamage;
+    //player.totalDamage = player.damage();
+    //opponent.totalDamage = opponent.damage()
+    gameState = "turning";
+    if(playerTurn == 1){     
+        //player = player2;
+        //opponent = player1;
         
-            //Animation
-            healthAnimation(oldHealth, player.currenthealth, p2Health);
-            p2Health.innerHTML = player.currenthealth + " / " + player.maxHealth;            
-        }
-        gameState == "attacking";        
+        races();
+
+        var oldHealth = player.currenthealth;        
+        player.currenthealth -= opponent.totalDamage;
+    
+        //Animation
+        healthAnimation(oldHealth, player.currenthealth, p2Health);
+        p2Health.innerHTML = player.currenthealth + " / " + player.maxHealth;                          
+
+        gameState = "attacking";
+        
+        console.log("Player 1 did a Life steal.");
+        addLogs("and did a lifesteal on you.");
+
     }else if(playerTurn == 2){
-        gameState == "turning";
-        player = player1;
-        opponent = player2;
-        if(opponent.race == "vampire"){
-            races();
-            var oldHealth = player.currenthealth;        
-            player.currenthealth -= opponent.totalDamage;
         
-            //Animation
-            healthAnimation(oldHealth, player.currenthealth, p1Health);
-            p1Health.innerHTML = player.currenthealth + " / " + player.maxHealth;
-        }
-        gameState == "attacking";
+        //player = player1;
+        //opponent = player2;
+
+        races();
+            
+        var oldHealth = player.currenthealth;        
+        player.currenthealth -= opponent.totalDamage;
+    
+        //Animation
+        healthAnimation(oldHealth, player.currenthealth, p1Health);
+        p1Health.innerHTML = player.currenthealth + " / " + player.maxHealth;                    
+
+        gameState = "attacking";
+
+        console.log("Player 2 did a Life steal.");
+        addLogs("and did a lifesteal on you.");
     }else{
-        console.log("Not a vampire no lifesteal");
+        console.log("Not working");
         return;
     }
+    //gameState == "attacking";
 }
 
 function attack(){
@@ -217,33 +235,40 @@ function attack(){
     opponent.totalDamage = opponent.damage()
     gameState = "attacking";
     //var chance;
-    if(playerTurn == 1){
-        //var chance;
-        //do{            
+    if(playerTurn == 1){       
             player = player2;
             opponent = player1;
-            console.log("\n");
+
             races();
             items();
             addLogs("Player 1 attacks Player 2"); 
-            /*console.log(player.chance);            
-            chance = player.chance;
-            console.log(chance);*/
+
             var oldHealth =  player.currenthealth;        
             player.currenthealth -= opponent.totalDamage;
-
+            
+        if(player.currenthealth <= 0){
+            player.currenthealth = 0;
             //Animation
             healthAnimation(oldHealth, player.currenthealth, p2Health);
             p2Health.innerHTML = player.currenthealth + " / " + player.maxHealth;
-            //chance--;
-            //console.log(chance);
-        //}while(chance != 0);
 
-        if(player.currenthealth <= 0){
             console.log("Game over. Player 1 Won!");
             addLogs("Game over. Player 1 Won");
-            gameOver = true;
+            //gameOver = true;
+
+            //disable the buttons for player1
+            hit1.disabled = true;
+            heal1.disabled = true;
+            yield1.disabled = true;
+            //disable the buttons for player2        
+            hit2.disabled = true;
+            heal2.disabled = true;
+            yield2.disabled = true;
         }else{            
+            //Animation
+            healthAnimation(oldHealth, player.currenthealth, p2Health);
+            p2Health.innerHTML = player.currenthealth + " / " + player.maxHealth;
+
             playerTurn = 2;
             //console.log(playerTurn);
             console.log("Damage Received: " + opponent.totalDamage);
@@ -251,10 +276,9 @@ function attack(){
             console.log("Player 2 turn to move");
             addLogs("Player 2 turn to move");                 
             console.log("\n");
-            setTimeout(turn(), 1000);
-            
-            //console.log("Current Health: " + player.currenthealth);
-            //disable the buttons for player1
+            //turn();  
+            console.log("Current Health: " + player.currenthealth);
+            //enable the buttons for player1
             hit1.disabled = true;
             heal1.disabled = true;
             yield1.disabled = true;
@@ -270,25 +294,39 @@ function attack(){
             //addLogs("Player 2","Turn to move");
             races();
             items();       
-            
+            addLogs("Player 2 attacks Player 1"); 
             var oldHealth = player.currenthealth;       
-            player.currenthealth -= opponent.totalDamage;
-            //Animation
-            healthAnimation(oldHealth, player.currenthealth, p1Health);
-            p1Health.innerHTML = player.currenthealth + " / " + player.maxHealth;         
+            player.currenthealth -= opponent.totalDamage;         
 
         if(player.currenthealth <= 0){
+            player.currenthealth = 0;
+            //Animation
+            healthAnimation(oldHealth, player.currenthealth, p1Health);
+            p1Health.innerHTML = player.currenthealth + " / " + player.maxHealth;
+
             console.log("Game over. Player 2 Won!");
             addLogs("Game over. Player 2 Won!");
-            gameOver = true;
-        }else{            
+
+            //disable the buttons for player1
+            hit1.disabled = true;
+            heal1.disabled = true;
+            yield1.disabled = true;
+            //disable the buttons for player2        
+            hit2.disabled = true;
+            heal2.disabled = true;
+            yield2.disabled = true;
+        }else{
+            //Animation
+            healthAnimation(oldHealth, player.currenthealth, p1Health);
+            p1Health.innerHTML = player.currenthealth + " / " + player.maxHealth;
+
             playerTurn = 1;
             console.log("Damage Received: " + opponent.totalDamage);
             console.log("Current Health: " + player.currenthealth);
             console.log("Player 1 turn to move");
             addLogs("Player 1 turn to move");
             console.log("\n");
-            setTimeout(turn(), 1000);
+            //turn();  
             console.log("Current Health: " + player.currenthealth);
             //enable the buttons for player1
             hit1.disabled = false;
@@ -304,20 +342,139 @@ function attack(){
     objDiv.scrollTop = objDiv.scrollHeight;
 }
 
+
 /*
  * Lower the health of your object and create a healing function that will use the heal function. (character.js) 
  * Make it so the function uses a random number between the minHealing and maxHealing.
  * Note: The currentHealth should NEVER go above the maxHealth
  */
-function healing(){
-    player.currenthealth += player.heal();
-    if(player.currenthealth >= player.maxHealth){
-        console.log("Your Health is Restored");
-        return player.currenthealth = player.maxHealth;
-    }else{
-        console.log("Your Health went up");
-        return player.currenthealth;
-    }    
+function healing(){  
+    console.log(playerTurn);
+
+    if(playerTurn == 1){
+        console.log(player);  
+        console.log(opponent); 
+        /*player = player2;
+        opponent = player1;           
+        console.log(player);  
+        console.log(opponent); 
+        var oldHealth = opponent.currenthealth;
+        opponent.currenthealth += opponent.heal();
+        console.log(oldHealth);
+        console.log(opponent.currenthealth); */
+        if(document.getElementById('heal1').clicked == true){
+            console.log("player 1 click the heal button");
+        }
+          
+        playerTurn = 2;
+            //enable the buttons for player1
+            hit1.disabled = true;
+            heal1.disabled = true;
+            yield1.disabled = true;
+            //disable the buttons for player2        
+            hit2.disabled = false;
+            heal2.disabled = false;
+            yield2.disabled = false;
+    }else{  
+        console.log(player);  
+        console.log(opponent);
+        if(document.getElementById('heal2').clicked == true){
+            console.log("player 2 click the heal button");
+        }
+       /* player = player1;
+        opponent = player2;
+        console.log(player);  
+        console.log(opponent); 
+        var oldHealth = player.currenthealth;
+        player.currenthealth += player.heal();
+        console.log(oldHealth);
+        console.log(player.currenthealth);*/
+        playerTurn = 1;
+            //enable the buttons for player1
+            hit1.disabled = false;
+            heal1.disabled = false;
+            yield1.disabled = false;
+            //disable the buttons for player2        
+            hit2.disabled = true;
+            heal2.disabled = true;
+            yield2.disabled = true;
+    }
+    //Animation
+    /*healthAnimation(oldHealth, opponent.currenthealth, p1Health);
+    p1Health.innerHTML = opponent.currenthealth + " / " + opponent.maxHealth;
+    console.log("Your Health is Restored");
+    addLogs("Your Health is Restored");  */  
+        /*if(playerTurn == 1){
+            //player1 = opponent;
+            var oldHealth = opponent.currenthealth;
+            opponent.currenthealth += opponent.heal();
+            console.log(oldHealth);
+            console.log(opponent.currenthealth);
+            
+            //opponent = player1;
+            if(opponent.currenthealth > opponent.maxHealth){
+                opponent.currenthealth = opponent.maxHealth;
+                //opponent = player1;
+                 //Animation
+                healthAnimation(oldHealth, opponent.currenthealth, p1Health);
+                p1Health.innerHTML = opponent.currenthealth + " / " + opponent.maxHealth;
+                console.log("Your Health is Restored");
+                addLogs("Your Health is Restored");
+            }else{
+                opponent.currenthealth;
+                opponent = player1;
+                //Animation
+                healthAnimation(oldHealth, opponent.currenthealth, p1Health);
+                p1Health.innerHTML = opponent.currenthealth + " / " + opponent.maxHealth;
+                console.log("Your Health went up");
+                addLogs("Your Health is Restored");
+            }
+            
+            playerTurn = 2;
+            //enable the buttons for player1
+            hit1.disabled = true;
+            heal1.disabled = true;
+            yield1.disabled = true;
+            //disable the buttons for player2        
+            hit2.disabled = false;
+            heal2.disabled = false;
+            yield2.disabled = false;
+            
+        }else{
+            //player2 = opponent;  
+            var oldHealth = opponent.currenthealth;
+            opponent.currenthealth += opponent.heal();
+            console.log(oldHealth);
+            console.log(opponent.currenthealth);
+                      
+            if(opponent.currenthealth > opponent.maxHealth){
+                opponent.currenthealth = opponent.maxHealth;
+                //opponent = player2;
+                //Animation
+                healthAnimation(oldHealth, opponent.currenthealth, p2Health);
+                p2Health.innerHTML = opponent.currenthealth + " / " + opponent.maxHealth;
+                console.log("Your Health is Restored");
+                addLogs("Your Health is Restored");
+            }else{
+                opponent.currenthealth;
+                //opponent = player2;
+                //Animation
+                healthAnimation(oldHealth, opponent.currenthealth, p2Health);
+                p2Health.innerHTML = opponent.currenthealth + " / " + opponent.maxHealth;
+                console.log("Your Health went up");
+                addLogs("Your Health is Restored");
+            }
+            
+            playerTurn = 1;
+            //enable the buttons for player1
+            hit1.disabled = false;
+            heal1.disabled = false;
+            yield1.disabled = false;
+            //disable the buttons for player2        
+            hit2.disabled = true;
+            heal2.disabled = true;
+            yield2.disabled = true;
+        }   */
 }
 
 function surrender(){
