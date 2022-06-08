@@ -43,7 +43,7 @@ label{color: white;}
   height: 455px;
 }
 #secondPanel{background:rgba(105, 204, 215, 0.5);}
-#logPanel, #movesPanel, #startPanel, #formPlayer2 {display: none;}
+#logPanel, #movesPanel, #startPanel, #formPlayer2, #formPlayer1 {display: none;}
 #player1Stat,#player2Stat{visibility: hidden;}
 
 ul{

@@ -1,0 +1,10 @@
+{
+  "name": "js-rpg",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "npx seve -p 8000 -i ."
+  },
+  "dependencies": {
+    "seve": "^0.10.0"
+  }
+}

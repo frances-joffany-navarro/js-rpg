@@ -22,6 +22,40 @@
             <!--Create and Log Panel-->
             <div id="firstPanel" class="col-12 col-md-3 col-lg-4 py-3 px-3" >
                 <div id="creationPanel">
+                    <form id="formPlayer">
+                        <section id="creationTitle">
+                            <h2>Create Avatar</h2>
+                            <hr>
+                            <p id="playerDescription">Player 1</p>
+                        </section>
+                        <div id="characterInputs">
+                            <div class="form-floating mb-3">
+                                <input type="text" id="name" autofocus class="form-control form-select-sm">
+                                <label for="name" class="form-label">Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select form-select-sm" aria-label="Race Selection" id="race">
+                                    <option value="" selected disabled>What do you want to be?</option>
+                                    <option value="humans">Human</option>
+                                    <option value="orcs">Orc</option>
+                                    <option value="elves">Elf</option>
+                                    <option value="vampires">Vampire</option>
+                                </select>
+                                <label for="races" class="form-label">Race</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select form-select-sm" aria-label="Item Selection" id="item">
+                                    <option value="" selected disabled>What do you want to have?</option>
+                                    <option value="boots">Boots</option>
+                                    <option value="staff">Staff</option>
+                                    <option value="sword">Sword</option>
+                                    <option value="bow">Bow</option>
+                                </select>
+                                <label for="items" class="form-label">Item</label>
+                            </div>        
+                        </div>
+                        <button type="button" id="createButton" class="btn">Create</button>   
+                    </form>
                     <form id="formPlayer1">
                         <section id="text1">
                             <h2>Create Avatar</h2>
@@ -94,19 +128,19 @@
                 <section id="startPanel">
                     <h2>The Players are Created</h2>
                     <p>Please press START button to play the game</p>
-                    <button type="button" id="start" class="btn">Start</button>   
+                    <button type="button" id="startButton" class="btn">Start</button>   
                 </section>
                 <section id="logPanel">
                     <h2>Players Log</h2>
                     <div id="logList" class="overflow-auto">
                         <ul id="logs"></ul>
                     </div>
-                    
                 </section>
             </div>
             <!--Statistic and Move Panel-->
             <div id="secondPanel" class="col-12 col-md-9 col-lg-8 py-3 px-3">
                 <div class="row">
+                    <!-- Character Statistics Display -->
                     <div class="col-12">
                         <!--<canvas id="statistics"></canvas>-->
                         <div class="row">
@@ -119,7 +153,7 @@
                                 </header>
                                 <div class="progress" style="height: 30px;">                                  
                                     <div id="p1Health" class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                    100%
+                                    <!-- 100% -->
                                     </div>                        
                                 </div>
                                 <!--<canvas id="p1Visual" height="300"></canvas>-->
@@ -133,7 +167,7 @@
                                 </header>
                                 <div class="progress" style="height: 30px;">                                
                                     <div id="p2Health" class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                    100%
+                                    <!-- 100% -->
                                     </div>
                                 </div>
                                 <!--<canvas id="p2Visual" height="300"></canvas>-->
@@ -143,6 +177,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Characters Moves Panel -->
                     <div id="movesPanel" class="col-12">
                         <div class="row">
                             <div class="col-6">
