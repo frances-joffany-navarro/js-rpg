@@ -1,4 +1,17 @@
+/* Eventlistener */
+heal1.addEventListener("click", healing);
+heal2.addEventListener("click", healing);
+hit1.addEventListener("click", attack);
+hit2.addEventListener("click", attack);
+yield1.addEventListener("click", yield)
+yield2.addEventListener("click", yield)
+
 function races(currentPlayer, opponent, race, damage, currentHealth, maxhealth, state) {
+  if (!state.creation) {
+    currentPlayer.oldhealth = currentPlayer.currenthealth
+    opponent.oldhealth = opponent.currenthealth
+  }
+
   switch (race) {
     case "humans":
       if (state.attacking) {
@@ -13,7 +26,7 @@ function races(currentPlayer, opponent, race, damage, currentHealth, maxhealth, 
       if (state.creation) {
         // 40% more max health
         currentPlayer.maxHealth += currentPlayer.maxHealth * 0.4
-        currentPlayer.currenthealth = currentPlayer.maxHealth
+        currentPlayer.currenthealth = currentPlayer.oldhealth = currentPlayer.maxHealth
 
         currentPlayer.displayChar()
       }
@@ -27,11 +40,14 @@ function races(currentPlayer, opponent, race, damage, currentHealth, maxhealth, 
         console.log(randomNumber);
         if (randomNumber <= 30) {
           //the attacker takes damage equal to 50% of the original hit
-          currentPlayer.displayChar()
-          return true
+          currentPlayer.totalDamage -= currentPlayer.totalDamage * 0.5
+          currentPlayer.currenthealth -= currentPlayer.totalDamage
+          /* currentPlayer.displayChar() */
+          /* return true */
+          break
         } else {
-          currentPlayer.displayChar()
-          return false
+          opponent.currenthealth -= currentPlayer.damage
+          break
         }
       }
       break;
@@ -39,6 +55,7 @@ function races(currentPlayer, opponent, race, damage, currentHealth, maxhealth, 
     case "vampires":
       if (state.turn) {
         // 10% lifesteal from opponents current health at the start of the vampires turn
+        opponent.oldhealth = opponent.currenthealth
         opponent.currenthealth -= opponent.currenthealth * 0.1
         console.log(`${currentPlayer.name} is a Vampire. Steals life from ${opponent.name}`);
       }
@@ -57,9 +74,15 @@ function items(currentPlayer, opponent, item, healingPower, damage) {
       // 30% chance to dodge an attack
 
       if (randomNumber <= 30) {
-        return true
+
+        /* return true */
+        console.log(`${opponent.name} dodge your attack`);
+        break;
       } else {
-        return false
+        /* return false */
+        opponent.oldhealth = opponent.currenthealth
+        opponent.currenthealth -= currentPlayer.damage
+
       }
 
     case 'staff':
@@ -68,23 +91,29 @@ function items(currentPlayer, opponent, item, healingPower, damage) {
       currentHeal += currentHeal * 0.2
 
       totalCurrentHealth = currentPlayer.currenthealth + currentHeal
-      if(totalCurrentHealth > currentPlayer.maxHealth){
+      if (totalCurrentHealth > currentPlayer.maxHealth) {
+        currentPlayer.oldhealth = currentPlayer.currenthealth
         currentPlayer.currenthealth = currentPlayer.maxHealth
       } else {
+        currentPlayer.oldhealth = currentPlayer.currenthealth
         currentPlayer.currenthealth = totalCurrentHealth
       }
       break;
 
     case 'sword':
       //30% more damage
-      damage += damage * 0.3
-      return damage
+      currentPlayer.totalDamage += currentPlayer.totalDamage * 0.3
+      /* damage += damage * 0.3 */
+      opponent.oldhealth = opponent.currenthealth
+      opponent.currenthealth -= currentPlayer.totalDamage
+      break;
 
     case 'bow':
       if (randomNumber <= 30) {
-        return true
+        turn(currentPlayer, opponent)
+        break
       } else {
-        return false
+        return
       }
 
     default:
@@ -106,6 +135,24 @@ function turn(player, opponent) {
    * Check the race of the current player
    * Check the items of the current player and the opponent
    */
+  if (currentTurn === 1) {
+    hit1.disabled = false;
+    heal1.disabled = false;
+    yield1.disabled = false;
+    hit2.disabled = true;
+    heal2.disabled = true;
+    yield2.disabled = true;
+  } else if (currentTurn === 2) {
+    hit1.disabled = true;
+    heal1.disabled = true;
+    yield1.disabled = true;
+    hit2.disabled = false;
+    heal2.disabled = false;
+    yield2.disabled = false;
+  } else {
+    console.log("Cannot disable the move buttons");
+  }
+
   state.turn = false;
 }
 
@@ -245,7 +292,19 @@ function attack() {
    * calculate the damage will receive
    */
 
-  items(player1, player2, player1.item, player1.healingPower, player.damage)
+  /* items(player1, player2, player1.item, player1.healingPower, player.damage) */
+  console.log("hit button is clicked");
+  if (currentTurn === 1) {
+    currentTurn = 2
+    turn(player1, player2)
+    healthAnimation(player1.oldhealth, player1.currenthealth, p1Health);
+    healthAnimation(player2.oldhealth, player2.currenthealth, p2Health);
+  } else if (currentTurn === 2) {
+    currentTurn = 1
+    turn(player2, player1)
+    healthAnimation(player1.oldhealth, player1.currenthealth, p1Health);
+    healthAnimation(player2.oldhealth, player2.currenthealth, p2Health);
+  }
 
   state.attacking = false
 

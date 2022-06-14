@@ -1,10 +1,12 @@
 //Use this script to generate your character
-function Person(race, item, name) {
+function Person(race, item, name, player) {
   this.race = race;
   this.item = item;
   this.name = name;
   this.currenthealth = 100;
   this.maxHealth = 100;
+  this.player = player
+  this.oldhealth = 100
 
   this.min = 3;
   this.maxDamage = 20;
@@ -27,6 +29,7 @@ function Person(race, item, name) {
 }
 
 var createCounter = 0;
+var moves = 0
 var character1, character2, player1, player2;
 var players = []
 var state = {
@@ -34,15 +37,12 @@ var state = {
   attacking: false,
   turn: false
 }
+var currentTurn = 1;
+
 
 /* Eventlistener */
 createButton.addEventListener("click", createState);
 startButton.addEventListener("click", readyState);
-
-heal1.addEventListener("click", healing);
-heal2.addEventListener("click", healing);
-hit1.addEventListener("click", attack);
-hit2.addEventListener("click", attack);
 
 function createState() {
   state.creation = true;
@@ -52,7 +52,7 @@ function createState() {
   var characterItem = document.getElementById('item');
 
   createCounter++;
-  //console.log(createCounter);
+  /* console.log(createCounter); */
   if (createCounter === 1) {
     //create character1
     //put values in player object
@@ -67,7 +67,7 @@ function createState() {
       item: 'boots'
     }
 
-    player1 = new Person(character1.race, character1.item, character1.name);
+    player1 = new Person(character1.race, character1.item, character1.name, createCounter);
     races(player1, player2, player1.race, player1.damage, player1.currenthealth, player1.maxHealth, state)
 
     playerDescription.innerHTML = 'Player 2';
@@ -86,7 +86,7 @@ function createState() {
       item: 'boots'
     }
 
-    player2 = new Person(character2.race, character2.item, character2.name);
+    player2 = new Person(character2.race, character2.item, character2.name, createCounter);
     races(player2, player1, player2.race, player2.damage, player2.currenthealth, player2.maxHealth, state)
 
     //change the create state to game state 
@@ -95,13 +95,14 @@ function createState() {
 
     createCounter = 0;
     playerDescription.innerHTML = 'Player 1';
+  } else {
+    console.log("There is something wrong");
   }
 
   characterName.value = '';
   characterRace.value = '';
   characterItem.value = '';
   state.creation = false;
-
 }
 
 function readyState() {
@@ -127,8 +128,11 @@ function readyState() {
     for
   } while (condition); */
 
-  turn(player1, player2)
-
+  if (currentTurn === 1) {
+    turn(player1, player2)
+  } else if (currentTurn === 2) {
+    turn(player2, player1)
+  }
 }
 
 function healthAnimation(from, to, sliderName) {
