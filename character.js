@@ -5,8 +5,8 @@ function Person(race, item, name, player) {
   this.name = name;
   this.currenthealth = 100;
   this.maxHealth = 100;
-  this.player = player
-  this.oldhealth = 100
+  this.player = player;
+  this.oldhealth = 100;
 
   this.min = 3;
   this.maxDamage = 20;
@@ -63,12 +63,12 @@ function createState() {
     } */
     character1 = {
       name: 'Frances',
-      race: 'humans',
+      race: 'orcs',
       item: 'boots'
     }
 
     player1 = new Person(character1.race, character1.item, character1.name, createCounter);
-    races(player1, player2, player1.race, player1.damage, player1.currenthealth, player1.maxHealth, state)
+
 
     playerDescription.innerHTML = 'Player 2';
 
@@ -87,7 +87,6 @@ function createState() {
     }
 
     player2 = new Person(character2.race, character2.item, character2.name, createCounter);
-    races(player2, player1, player2.race, player2.damage, player2.currenthealth, player2.maxHealth, state)
 
     //change the create state to game state 
     startPanel.style.display = 'block';
@@ -95,6 +94,9 @@ function createState() {
 
     createCounter = 0;
     playerDescription.innerHTML = 'Player 1';
+
+    races(player1, player2, player1.race, state)
+    races(player2, player1, player2.race, state)
   } else {
     console.log("There is something wrong");
   }
@@ -120,25 +122,27 @@ function readyState() {
   p1Health.innerText = `${player1.currenthealth} / ${player1.maxHealth}`;
   p2Health.innerText = `${player2.currenthealth} / ${player2.maxHealth}`;
 
-  healthAnimation(0, player1.currenthealth, p1Health);
-  healthAnimation(0, player2.currenthealth, p2Health);
+  healthAnimation(0, player1.currenthealth, player1.maxHealth, p1Health);
+  healthAnimation(0, player2.currenthealth, player2.maxHealth, p2Health);
 
   /* players = [player1, player2]
   do {
     for
   } while (condition); */
+  setTimeout(() => {
+    if (currentTurn === 1) {
+      turn(player1, player2)
+    } else if (currentTurn === 2) {
+      turn(player2, player1)
+    }
+  }, "1500")
 
-  if (currentTurn === 1) {
-    turn(player1, player2)
-  } else if (currentTurn === 2) {
-    turn(player2, player1)
-  }
 }
 
-function healthAnimation(from, to, sliderName) {
+function healthAnimation(from, to, totalPercent, sliderName) {
   sliderName.animate([
-    { width: from + "%" },
-    { width: to + "%" },
+    { width: `${100 * from / totalPercent}%` },
+    { width: `${100 * to / totalPercent}%` },
   ], {
     duration: 1000,
     fill: "forwards",
