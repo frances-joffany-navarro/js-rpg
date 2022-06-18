@@ -95,6 +95,21 @@ function items(currentPlayer, opponent, item) {
       } else {
         opponent.oldhealth = opponent.currenthealth
         opponent.currenthealth -= currentPlayer.damage()
+
+        if (currentPlayer.player === 1) {
+
+          p2Health.innerText = `${opponent.currenthealth} / ${opponent.maxHealth}`;
+          healthAnimation(opponent.oldhealth, opponent.currenthealth, opponent.maxHealth, p2Health);
+
+        } else if (currentPlayer.player === 2) {
+
+          p1Health.innerText = `${opponent.currenthealth} / ${opponent.maxHealth}`;
+          healthAnimation(opponent.oldhealth, opponent.currenthealth, opponent.maxHealth, p1Health);
+
+        } else {
+
+          console.log("Cannot find this current player");
+        }
       }
       break;
 
@@ -150,7 +165,6 @@ function turn(player, opponent) {
     heal2.disabled = true;
     yield2.disabled = true;
 
-    currentTurn = 2
   } else if (currentTurn === 2) {
     hit1.disabled = true;
     heal1.disabled = true;
@@ -159,15 +173,14 @@ function turn(player, opponent) {
     heal2.disabled = false;
     yield2.disabled = false;
 
-    currentTurn = 1
   } else {
     console.log("Cannot disable the move buttons");
   }
-
+  console.log("currentTurn", currentTurn);
   console.log(`${player.name}'s Turn`);
   races(player, opponent, player.race, state)
 
-  if (player.player === 1) {
+  /* if (player.player === 1) {
 
     if (player.currenthealth !== player.oldhealth) {
       p1Health.innerText = `${player.currenthealth} / ${player.maxHealth}`;
@@ -178,8 +191,6 @@ function turn(player, opponent) {
       p2Health.innerText = `${opponent.currenthealth} / ${opponent.maxHealth}`;
       healthAnimation(opponent.oldhealth, opponent.currenthealth, opponent.maxHealth, p2Health);
     }
-
-
 
   } else if (player.player === 2) {
 
@@ -193,12 +204,10 @@ function turn(player, opponent) {
       healthAnimation(opponent.oldhealth, opponent.currenthealth, opponent.maxHealth, p1Health);
     }
 
-
-
   } else {
 
     console.log("there is a problem");
-  }
+  } */
 
   /** 
    * Disable the button of the opponent
@@ -223,38 +232,54 @@ function attack() {
   /* items(player1, player2, player1.item, player1.healingPower, player.damage) */
 
   if (currentTurn === 1) {
+    const p1pasthealth = player1.currenthealth
+    const p2pasthealth = player2.currenthealth
 
     items(player1, player2, player1.item)
     /* items(player2, player1, player2.item) */
 
-    if (player1.currenthealth !== player1.oldhealth) {
+    /* console.log("1", p1pasthealth, p1pasthealth);
+    console.log("1", player1.currenthealth, player2.currenthealth);
+
+    if (player1.currenthealth !== p1pasthealth) {
       p1Health.innerText = `${player1.currenthealth} / ${player1.maxHealth}`;
       healthAnimation(player1.oldhealth, player1.currenthealth, player1.maxHealth, p1Health);
+      console.log('1 1', player1.currenthealth, player1.oldhealth);
     }
 
-    if (player2.currenthealth !== player2.oldhealth) {
+    if (player2.currenthealth !== p2pasthealth) {
       p2Health.innerText = `${player2.currenthealth} / ${player2.maxHealth}`;
       healthAnimation(player2.oldhealth, player2.currenthealth, player2.maxHealth, p2Health);
-    }
+      console.log('1 2', player2.currenthealth, player2.oldhealth);
+    } */
+    currentTurn = 2
 
-    turn(player1, player2)
+    turn(player2, player1)
 
   } else if (currentTurn === 2) {
+    /* const p1pasthealth = player1.currenthealth
+    const p2pasthealth = player2.currenthealth */
 
     items(player2, player1, player2.item)/* 
     items(player1, player2, player1.item) */
+    /* console.log("2", p1pasthealth, p1pasthealth);
+    console.log("2", player1.currenthealth, player2.currenthealth);
 
-    if (player1.currenthealth !== player1.oldhealth) {
+    if (player1.currenthealth !== p1pasthealth) {
+
       p1Health.innerText = `${player1.currenthealth} / ${player1.maxHealth}`;
       healthAnimation(player1.oldhealth, player1.currenthealth, player1.maxHealth, p1Health);
+      console.log('2 1', player1.currenthealth, player1.oldhealth);
     }
 
-    if (player2.currenthealth !== player2.oldhealth) {
+    if (player2.currenthealth !== p2pasthealth) {
       p2Health.innerText = `${player2.currenthealth} / ${player2.maxHealth}`;
       healthAnimation(player2.oldhealth, player2.currenthealth, player2.maxHealth, p2Health);
-    }
+      console.log('2 2', player2.currenthealth, player2.oldhealth);
+    } */
 
-    turn(player2, player1)
+    currentTurn = 1
+    turn(player1, player2)
 
   } else {
     console.log('There is something wrong with attacking');
