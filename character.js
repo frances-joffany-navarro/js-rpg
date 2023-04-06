@@ -83,7 +83,7 @@ function createState() {
     character2 = {
       name: 'Joffany',
       race: 'orcs',
-      item: 'boots'
+      item: 'sword'
     }
 
     player2 = new Person(character2.race, character2.item, character2.name, createCounter);
@@ -148,33 +148,3 @@ function healthAnimation(from, to, totalPercent, sliderName) {
     fill: "forwards",
   });
 }
-
-/* function isTurn(turn) {    
-    races();
-    if (turn === 0) {
-        console.log(/*`${character1.name}'s Turn`*//*"Frances's Turn");
-console.log(turn);
-hit1.disabled = false;
-heal1.disabled = false;
-yield1.disabled = false;
-
-hit2.disabled = true;
-heal2.disabled = true;
-yield2.disabled = true;
- 
-console.log(hero);
-}
-if (turn === 1) {
-console.log(/*`${character2.name}'s Turn`*//*"Happy's Turn");
-console.log(turn);
-hit1.disabled = true;
-heal1.disabled = true;
-yield1.disabled = true;
-
-hit2.disabled = false;
-heal2.disabled = false;
-yield2.disabled = false;
-
-console.log(enemy);
-}
-} */
