@@ -4,49 +4,22 @@ import { Person } from "./character.js";
 const player1 = new Person("humans", "sword", "Frances");
 const player2 = new Person("orcs", "boots", "Computer");
 
-let gameEvents = {
-  "creation": true,
-  "attack": false,
-  "healing": false
-};
+let turn = 0;
 
-player1.displayChar(), player2.displayChar()
-
-
-
-function race(player, opponent) {
-  switch (player.race) {
-    case "humans":
-      //20% less damage taken
-
-      break;
-
-    case "orcs":
-      /* 40% more max health - this applies only on creation */
-      if (gameEvents.creation == true) {
-        player.maxHealth += player.maxHealth * 0.4;
-      }
-
-      break;
-
-    case "elves":
-      //30% chance to deflect the attack back to the opponent. 
-      // The attacker takes damage equal to 50% of the original hit. 
-      // The elf takes no damage.
-      const randomLuck = Math.floor(Math.random() * 100) + 1;
-      if (randomLuck <= 30) {
-        totalDamage = 0;
-        opponent.totalDamage
-      } else {
-        totalDamage = randomDamageNumber;
-      }
-      break;
-
-    case "vampires":
-
-      break;
-
-    default:
-      break;
+if (turn == 0) {
+  if (player1.currenthealth <= 0) {
+    console.log(`Game over! ${player2.name} WON!`);
+  } else if (player1.currenthealth > 0) {
+    console.log(`${player1.name} turn!`);
   }
+} else {
+  if (player2.currenthealth <= 0) {
+    console.log(`Game over! ${player1.name} WON!`);
+  } else if (player2.currenthealth > 0) {
+    console.log(`${player2.name} turn!`);
+  }
+}
+
+function attack() {
+
 }
