@@ -1,24 +1,32 @@
 import { Person } from "./character.js";
 
 //Initialize Temporary Characters
-const player1 = new Person("elves", "boots", "Frances");
+const player1 = new Person("humans", "sword", "Frances");
 const player2 = new Person("orcs", "boots", "Computer");
+
+let gameEvents = {
+  "creation": true,
+  "attack": false,
+  "healing": false
+};
 
 player1.displayChar(), player2.displayChar()
 
-console.log(player1.totalDamage)
 
-function race (player) {
-  switch (this.race) {
+
+function race(player, opponent) {
+  switch (player.race) {
     case "humans":
       //20% less damage taken
 
       break;
 
     case "orcs":
-      /* 40% more max health */
-      this.maxHealth += this.maxHealth * 0.4;
-      totalDamage = randomDamageNumber;
+      /* 40% more max health - this applies only on creation */
+      if (gameEvents.creation == true) {
+        player.maxHealth += player.maxHealth * 0.4;
+      }
+
       break;
 
     case "elves":

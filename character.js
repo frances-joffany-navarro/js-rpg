@@ -5,54 +5,38 @@ function Person(race, item, name) {
   this.name = name;
   this.currenthealth = 100;
   this.maxHealth = 100;
+  
+  if (this.race === "orcs") {
+    this.maxHealth += this.maxHealth * 0.4
+  }
 
   this.min = 3;
   this.maxDamage = 20;
   this.maxHealing = 30;
 
   this.heal = function () {
-    return Math.floor(Math.random() * (this.maxHealing - this.min) + this.min);
+    let healingPower = Math.floor(Math.random() * (this.maxHealing - this.min) + this.min);
+    /* if (this.item === "staff") {
+      healingPower += Math.round(healingPower * 0.2);
+      return healingPower;
+    } */
+    return healingPower;
   };
 
   this.damage = function () {
-    const randomDamageNumber = Math.floor(Math.random() * (this.maxDamage - this.min) + this.min);
-    let totalDamage;
-    switch (this.race) {
-      case "humans":
-        //20% less damage taken
-        totalDamage = randomDamageNumber - Math.round(randomDamageNumber * 0.20)
-        break;
-
-      case "orcs":
-        /* 40% more max health */
-        this.maxHealth += this.maxHealth * 0.4;
-        totalDamage = randomDamageNumber;
-        break;
-
-      case "elves":
-        //30% chance to deflect the attack back to the opponent. 
-        // The attacker takes damage equal to 50% of the original hit. 
-        // The elf takes no damage.
-        totalDamage = randomDamageNumber;
-        break;
-
-      case "vampires":
-        totalDamage = randomDamageNumber;
-        break;
-
-      default:
-        break;
-    }
-
-    return totalDamage;
+    let damagingPower = Math.floor(Math.random() * (this.maxDamage - this.min) + this.min);
+    /* if (this.item === "sword") {
+      console
+      damagingPower += Math.round(damagingPower * 0.2);
+    } */
+    return damagingPower;
   };
 
   this.totalDamage = this.damage();// how much damage you will give to your opponent
-  this.totalHeal = this.heal()
 
   this.displayChar = function () {
     return console.log(this.name, `I am a ${this.race}, I wield a ${this.item}, my total health point are ${this.maxHealth}`);
   };
 };
 
-export { Person };
+export { Person }; 
