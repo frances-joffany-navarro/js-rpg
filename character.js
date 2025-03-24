@@ -6,7 +6,7 @@ function Person(race, item, name) {
   this.currenthealth = 100;
   this.maxHealth = 100;
   
-  if (this.race === "orcs") {
+  if (this.race === "orc") {
     this.maxHealth += this.maxHealth * 0.4;
     this.currenthealth = this.maxHealth;
   }
