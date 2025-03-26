@@ -20,7 +20,7 @@ function counter(turn) {
       const lifeStealFromOpponent = player2.currenthealth * 0.1;
       player2.currenthealth -= lifeStealFromOpponent;
       player1.currenthealth += lifeStealFromOpponent;
-      checkGameOver();
+      checkGameOver(player1);
     }
     console.log(`${player1.name} turn!`);
     console.log(`Current Health: ${player1.currenthealth}`);
@@ -33,14 +33,16 @@ function counter(turn) {
     }
 
     console.log(`${player1.name} choose ${move}`);
+    races(player1, player2);
     checkMove(player1, player2, move);
+    checkGameOver(player1);
   } else {
     races(player2, player1);
     if (player2.race === "vampire") {
       const lifeStealFromOpponent = player1.currenthealth * 0.1;
       player1.currenthealth -= lifeStealFromOpponent;
       player2.currenthealth += lifeStealFromOpponent;
-      checkGameOver();
+      checkGameOver(player2);
     }
     console.log(`${player2.name} turn!`);
     console.log(`Current Health: ${player2.currenthealth}`);
@@ -53,7 +55,9 @@ function counter(turn) {
     }
 
     console.log(`${player2.name} choose ${move}`);
+    races(player2, player1);
     checkMove(player2, player1, move);
+    checkGameOver(player2);
 
     /* if (player2.currenthealth <= 0) {
       console.log(`Game over! ${player1.name} WON!`);
@@ -77,34 +81,38 @@ function counter(turn) {
 
 function races(player, opponent) {
   let damagePower = player.damage();
+
   if (opponent.race === "human") {
     console.log("Initial Damage: ", damagePower);
     damagePower -= Math.round(damagePower * 0.2);
     console.log("Total Damage: ", damagePower);
-    return damagePower;
+    return { damagePower };
   } else if (opponent.race === "elf") {
-    const randomLuck = Math.floor(Math.random() * 100 + 1);
-    console.log(randomLuck);
-    if (randomLuck >= 1 && randomLuck <= 30) {
+    const luckNumber = randomLuck();
+    if (luckNumber >= 1 && luckNumber <= 30) {
       console.log(`${opponent.name} is lucky. She/He deflect your attack.`);
-      console.log("Initial: ",damagePower);
+      console.log("Initial: ", damagePower);
       damagePower += Math.round(damagePower * 0.3);
-      player.currenthealth -= damagePower;
       console.log("Final: ", damagePower);
-      console.log("The 30% damage was deflected to you.");
-      return 0;
+      //player.currenthealth -= damagePower;      
+      //console.log("The 30% damage was deflected to you.");
+      return { damagePower, luck: true, message: "The 30% damage was deflected to you." };
     } else {
       console.log(`${opponent.name} is not lucky. She/He can't deflect your attack.`);
-      return damagePower;
+      return { playerDamage: 0, opponentDamage: damagePower, message: "You're opponent take the hit." };
     }
   }
 }
 
+function randomLuck() {
+  return Math.floor(Math.random() * 100 + 1);
+}
 
 function checkMove(player, opponent, move) {
   switch (move) {
     case "1":
       console.log(`${player.name} wants to attack opponent`);
+
 
       break;
 
@@ -151,4 +159,12 @@ function checkMove(player, opponent, move) {
   }
 }
 
-function checkGameOver() { }
+function checkGameOver(player) {
+  if (currenthealth <= 0) {
+    console.log("Gameover!");
+    console.log(`${player.name} lost her life.`);
+    return true;
+  }else{
+    return false;
+  }
+}
