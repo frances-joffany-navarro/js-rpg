@@ -1,8 +1,8 @@
 import { Person } from "./character.js";
 
 //Initialize Temporary Characters
-const player1 = new Person("vampire", "sword", "Frances");
-const player2 = new Person("vampire", "boots", "Computer");
+const player1 = new Person("human", "sword", "Frances");
+const player2 = new Person("human", "boots", "Computer");
 
 player1.displayChar();
 player2.displayChar();
@@ -28,6 +28,7 @@ function counter(turn) {
       const p1CurrentHealth = player1.currenthealth + lifeStealFromOpponent;
       const p2CurrentHealth = player2.currenthealth - lifeStealFromOpponent;
       console.log(lifeStealFromOpponent, p1CurrentHealth, p2CurrentHealth);
+
       if (p1CurrentHealth > player1.maxHealth) {
         player1.currenthealth = player1.maxHealth;
       } else {
@@ -103,9 +104,8 @@ function counter(turn) {
   }
 }
 
-function item(player, opponent) {
-  races(player, opponent);
-  if (opponent.item === "boots") {
+function item(player, damagePower = player.damage()) {
+  /* if (opponent.item === "boots") {
     const randomLuck = Math.floor(Math.random() * 100 + 1);
     if (randomLuck <= 1 || randomLuck >= 30) {
       return
@@ -113,18 +113,21 @@ function item(player, opponent) {
       console.log(`${opponent.name} is not lucky. She/He can't dodge your attack.`);
       opponent.currenthealth -= player.damage
     }
+  } */
+  if (player.item === "sword") {
+    damagePower += damagePower * 0.3;
+    return damagePower;
   }
 }
 
-function races(player, opponent) {
-  let damagePower = player.damage();
+function races(opponent, damagePower) {
 
   if (opponent.race === "human") {
     console.log("Initial Damage: ", damagePower);
     damagePower -= Math.round(damagePower * 0.2);
     console.log("Total Damage: ", damagePower);
     return { damagePower };
-  } else if (opponent.race === "elf") {
+  } /* else if (opponent.race === "elf") {
     const luckNumber = randomLuck();
     if (luckNumber >= 1 && luckNumber <= 30) {
       console.log(`${opponent.name} is lucky. She/He deflect your attack.`);
@@ -138,7 +141,7 @@ function races(player, opponent) {
       console.log(`${opponent.name} is not lucky. She/He can't deflect your attack.`);
       return { playerDamage: 0, opponentDamage: damagePower, chances: 1, message: "You're opponent take the hit." };
     }
-  }
+  } */
 }
 
 function randomLuck() {
@@ -148,14 +151,21 @@ function randomLuck() {
 function checkMove(player, opponent, move) {
   switch (move) {
     case "1":
+      //computing the damage to give to the opponent
       console.log(`${player.name} wants to attack opponent`);
+      let initialDamagePower = item(player);
+      console.log(initialDamagePower);
+      console.log(races(opponent, initialDamagePower));
+
+
       if (turn === 0) {
         turn = 1;
       } else {
         turn = 0;
       }
-      starting = 1;
-      counter(turn);
+      gameOver = 1;
+      //starting = 1;
+      //counter(turn);
       break;
 
     case "2":
