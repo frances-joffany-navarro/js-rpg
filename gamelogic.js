@@ -1,7 +1,7 @@
 import { Person } from "./character.js";
 
 //Initialize Temporary Characters
-const player1 = new Person("human", "sword", "Frances");
+const player1 = new Person("human", "bow", "Frances");
 const player2 = new Person("human", "boots", "Computer");
 
 player1.displayChar();
@@ -116,13 +116,33 @@ function item(player, damagePower = player.damage()) {
   } */
   if (player.item === "sword") {
     damagePower += damagePower * 0.3;
-    return damagePower;
+    return { damagePower, chanceAttack: false, chanceDodge: false };
+  } else if (player.item === "bow") {
+    const luckNumber = randomLuck();
+    if (luckNumber <= 1 || luckNumber >= 30) {
+      console.log(`${player.name} is lucky. Attack twice!`);
+      return { damagePower, chanceAttack: true, chanceDodge: false };
+    } else {
+      console.log(`${player.name} is unlucky. Attack once!`);
+      return { damagePower, chanceAttack: false, chanceDodge: false };
+    }
+  } else if (player.item === "boots") {
+    const luckNumber = randomLuck();
+    if (luckNumber <= 1 || luckNumber >= 30) {
+      console.log(`${player.name} is lucky. Dodge attack`);
+      return { damagePower, chanceAttack: false, chanceDodge: true };
+    } else {
+      console.log(`${player.name} is unlucky. Cannot dodge attack`);
+      return { damagePower, chanceAttack: false, chanceDodge: false };
+    }
+  } else {
+    return { damagePower, chanceAttack: false, chanceDodge: false };
   }
 }
 
-function races(opponent, damagePower) {
+function races(player, damagePower) {
 
-  if (opponent.race === "human") {
+  if (player.race === "human") {
     console.log("Initial Damage: ", damagePower);
     damagePower -= Math.round(damagePower * 0.2);
     console.log("Total Damage: ", damagePower);
@@ -153,9 +173,17 @@ function checkMove(player, opponent, move) {
     case "1":
       //computing the damage to give to the opponent
       console.log(`${player.name} wants to attack opponent`);
-      let initialDamagePower = item(player);
-      console.log(initialDamagePower);
-      console.log(races(opponent, initialDamagePower));
+      let playerDamagePower = item(player);
+      console.log(playerDamagePower);
+      let initialDamage = races(opponent, playerDamagePower.damagePower);
+      console.log(initialDamage);
+      let opponentDamagePower = item(opponent, initialDamage);
+      console.log(opponentDamagePower);
+
+      
+      if (playerDamage.chanceAttack){
+
+      }
 
 
       if (turn === 0) {
