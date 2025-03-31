@@ -1,3 +1,4 @@
+//import { getCurrentInstance } from "vue";
 import { Person } from "./character.js";
 
 //Initialize Temporary Characters
@@ -7,7 +8,7 @@ const player2 = new Person("human", "boots", "Computer");
 player1.displayChar();
 player2.displayChar();
 
-player1.currenthealth = 70
+//player1.currenthealth = 70
 
 let turn = 0;
 let starting = 1;
@@ -119,7 +120,7 @@ function item(player, damagePower = player.damage()) {
     return { damagePower, chanceAttack: false, chanceDodge: false };
   } else if (player.item === "bow") {
     const luckNumber = randomLuck();
-    if (luckNumber <= 1 || luckNumber >= 30) {
+    if (luckNumber >= 1 && luckNumber <= 30) {
       console.log(`${player.name} is lucky. Attack twice!`);
       return { damagePower, chanceAttack: true, chanceDodge: false };
     } else {
@@ -128,7 +129,7 @@ function item(player, damagePower = player.damage()) {
     }
   } else if (player.item === "boots") {
     const luckNumber = randomLuck();
-    if (luckNumber <= 1 || luckNumber >= 30) {
+    if (luckNumber >= 1 && luckNumber <= 30) {
       console.log(`${player.name} is lucky. Dodge attack`);
       return { damagePower, chanceAttack: false, chanceDodge: true };
     } else {
@@ -180,10 +181,32 @@ function checkMove(player, opponent, move) {
       let opponentDamagePower = item(opponent, initialDamage);
       console.log(opponentDamagePower);
 
-      
-      if (playerDamage.chanceAttack){
-
+      if (!opponentDamagePower.chanceDodge) {
+        let currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
+        checkGameOver(currenthealth);
+        if (!checkGameOver) {
+          opponent.currenthealth = currenthealth;
+        }
       }
+
+      //check chance attack
+      if (playerDamagePower.chanceAttack) {
+        let secondDamageAttack = player.damage();
+        console.log(secondDamageAttack);
+        let initialDamage = races(opponent, secondDamageAttack);
+        console.log(initialDamage);
+        let opponentDamagePower = item(opponent, initialDamage);
+        console.log(opponentDamagePower);
+
+        if (!opponentDamagePower.chanceDodge) {
+          let currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
+          checkGameOver(currenthealth);
+          if (!checkGameOver) {
+            opponent.currenthealth = currenthealth;
+          }
+        }
+      }
+
 
 
       if (turn === 0) {
@@ -191,9 +214,9 @@ function checkMove(player, opponent, move) {
       } else {
         turn = 0;
       }
-      gameOver = 1;
-      //starting = 1;
-      //counter(turn);
+      //gameOver = 1;
+      starting = 1;
+      counter(turn);
       break;
 
     case "2":
@@ -240,10 +263,11 @@ function checkMove(player, opponent, move) {
   }
 }
 
-function checkGameOver(player) {
-  if (player.currenthealth <= 0) {
+function checkGameOver(player, currenthealth) {
+  if (currenthealth <= 0) {
     console.log("Gameover!");
     console.log(`${player.name} lost her life.`);
+    gameOver = 1;
     return true;
   } else {
     return false;
