@@ -115,6 +115,7 @@ function item(player, damagePower = player.damage()) {
       opponent.currenthealth -= player.damage
     }
   } */
+  console.log(damagePower);
   if (player.item === "sword") {
     damagePower += damagePower * 0.3;
     return { damagePower, chanceAttack: false, chanceDodge: false };
@@ -147,7 +148,7 @@ function races(player, damagePower) {
     console.log("Initial Damage: ", damagePower);
     damagePower -= Math.round(damagePower * 0.2);
     console.log("Total Damage: ", damagePower);
-    return { damagePower };
+    return damagePower ;
   } /* else if (opponent.race === "elf") {
     const luckNumber = randomLuck();
     if (luckNumber >= 1 && luckNumber <= 30) {
@@ -174,34 +175,38 @@ function checkMove(player, opponent, move) {
     case "1":
       //computing the damage to give to the opponent
       console.log(`${player.name} wants to attack opponent`);
-      let playerDamagePower = item(player);
+      const playerDamagePower = item(player);
       console.log(playerDamagePower);
-      let initialDamage = races(opponent, playerDamagePower.damagePower);
+      const initialDamage = races(opponent, playerDamagePower.damagePower);
       console.log(initialDamage);
-      let opponentDamagePower = item(opponent, initialDamage);
-      console.log(opponentDamagePower);
+      const opponentDamagePower = item(opponent, initialDamage);
+      console.log(opponentDamagePower, opponentDamagePower.chanceDodge);
 
       if (!opponentDamagePower.chanceDodge) {
-        let currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
-        checkGameOver(currenthealth);
-        if (!checkGameOver) {
+        console.log("Dodge");
+        const currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
+        const isGameOver = checkGameOver(currenthealth);
+        console.log(currenthealth, typeof currenthealth)
+        if (!isGameOver) {
           opponent.currenthealth = currenthealth;
         }
       }
 
       //check chance attack
       if (playerDamagePower.chanceAttack) {
-        let secondDamageAttack = player.damage();
+        const secondDamageAttack = player.damage();
         console.log(secondDamageAttack);
-        let initialDamage = races(opponent, secondDamageAttack);
+        const initialDamage = races(opponent, secondDamageAttack);
         console.log(initialDamage);
-        let opponentDamagePower = item(opponent, initialDamage);
-        console.log(opponentDamagePower);
+        const opponentDamagePower = item(opponent, initialDamage);
+        console.log(opponentDamagePower, opponentDamagePower.chanceDodge);
 
         if (!opponentDamagePower.chanceDodge) {
-          let currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
-          checkGameOver(currenthealth);
-          if (!checkGameOver) {
+          console.log("Dodge");
+          const currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
+          const isGameOver = checkGameOver(currenthealth);
+          console.log(currenthealth, typeof currenthealth)
+          if (!isGameOver) {
             opponent.currenthealth = currenthealth;
           }
         }
