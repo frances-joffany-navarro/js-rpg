@@ -13,6 +13,7 @@ player2.displayChar();
 let turn = 0;
 let starting = 1;
 let gameOver = 0;
+
 do {
   counter(turn);
 }
@@ -148,7 +149,7 @@ function races(player, damagePower) {
     console.log("Initial Damage: ", damagePower);
     damagePower -= Math.round(damagePower * 0.2);
     console.log("Total Damage: ", damagePower);
-    return damagePower ;
+    return damagePower;
   } /* else if (opponent.race === "elf") {
     const luckNumber = randomLuck();
     if (luckNumber >= 1 && luckNumber <= 30) {
@@ -185,9 +186,13 @@ function checkMove(player, opponent, move) {
       if (!opponentDamagePower.chanceDodge) {
         console.log("Dodge");
         const currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
-        const isGameOver = checkGameOver(currenthealth);
-        console.log(currenthealth, typeof currenthealth)
-        if (!isGameOver) {
+        //const isGameOver = checkGameOver(currenthealth);
+        if (currenthealth <= 0) {
+          console.log("Gameover!");
+          console.log(`${player1.name} lost her life.`);
+          gameOver = 1;
+          return;
+        } else {
           opponent.currenthealth = currenthealth;
         }
       }
@@ -204,15 +209,17 @@ function checkMove(player, opponent, move) {
         if (!opponentDamagePower.chanceDodge) {
           console.log("Dodge");
           const currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
-          const isGameOver = checkGameOver(currenthealth);
-          console.log(currenthealth, typeof currenthealth)
-          if (!isGameOver) {
+          
+          if (currenthealth <= 0) {
+            console.log("Gameover!");
+            console.log(`${player1.name} lost her life.`);
+            gameOver = 1;
+            return;
+          } else {
             opponent.currenthealth = currenthealth;
           }
         }
       }
-
-
 
       if (turn === 0) {
         turn = 1;
