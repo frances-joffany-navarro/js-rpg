@@ -3,7 +3,7 @@ import { Person } from "./character.js";
 
 //Initialize Temporary Characters
 const player1 = new Person("human", "bow", "Frances");
-const player2 = new Person("human", "boots", "Computer");
+const player2 = new Person("elf", "boots", "Computer");
 
 player1.displayChar();
 player2.displayChar();
@@ -149,22 +149,25 @@ function races(player, damagePower) {
     console.log("Initial Damage: ", damagePower);
     damagePower -= Math.round(damagePower * 0.2);
     console.log("Total Damage: ", damagePower);
-    return damagePower;
-  } /* else if (opponent.race === "elf") {
+    return { damagePower };
+
+  } else if (player.race === "elf") {
+    let hasChanceDeflect;
     const luckNumber = randomLuck();
+
     if (luckNumber >= 1 && luckNumber <= 30) {
-      console.log(`${opponent.name} is lucky. She/He deflect your attack.`);
+      console.log(`${player.name} is lucky. She/He deflect your attack.`);
       console.log("Initial: ", damagePower);
-      damagePower += Math.round(damagePower * 0.3);
+      damagePower -= Math.round(damagePower * 0.3);
       console.log("Final: ", damagePower);
-      //player.currenthealth -= damagePower;      
-      //console.log("The 30% damage was deflected to you.");
-      return { playerDamage: damagePower, opponentDamage: 0, chances: 2, message: "The 30% damage was deflected to you." };
+      hasChanceDeflect = true;
     } else {
-      console.log(`${opponent.name} is not lucky. She/He can't deflect your attack.`);
-      return { playerDamage: 0, opponentDamage: damagePower, chances: 1, message: "You're opponent take the hit." };
+      console.log(`${player.name} is not lucky. She/He can't deflect your attack.`);
+      hasChanceDeflect = false;
     }
-  } */
+
+    return { damagePower, chanceDeflect: hasChanceDeflect };
+  }
 }
 
 function randomLuck() {
@@ -180,16 +183,37 @@ function checkMove(player, opponent, move) {
       console.log(playerDamagePower);
       const initialDamage = races(opponent, playerDamagePower.damagePower);
       console.log(initialDamage);
-      const opponentDamagePower = item(opponent, initialDamage);
+      const opponentDamagePower = item(opponent, initialDamage.damagePower);
       console.log(opponentDamagePower, opponentDamagePower.chanceDodge);
 
+      if (initialDamage.chanceDeflect) {
+        const currenthealth = player.currenthealth - initialDamage.damagePower;
+        if (currenthealth <= 0) {
+          console.log("Gameover!");
+          console.log(`${player.name} lost her life.`);
+          gameOver = 1;
+          return;
+        } else {
+          player.currenthealth = currenthealth;
+        }
+      } else {
+        const currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
+        if (currenthealth <= 0) {
+          console.log("Gameover!");
+          console.log(`${opponent.name} lost her life.`);
+          gameOver = 1;
+          return;
+        } else {
+          opponent.currenthealth = currenthealth;
+        }
+      }
+
       if (!opponentDamagePower.chanceDodge) {
-        console.log("Dodge");
         const currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
         //const isGameOver = checkGameOver(currenthealth);
         if (currenthealth <= 0) {
           console.log("Gameover!");
-          console.log(`${player1.name} lost her life.`);
+          console.log(`${opponent.name} lost her life.`);
           gameOver = 1;
           return;
         } else {
@@ -199,20 +223,42 @@ function checkMove(player, opponent, move) {
 
       //check chance attack
       if (playerDamagePower.chanceAttack) {
+
         const secondDamageAttack = player.damage();
         console.log(secondDamageAttack);
         const initialDamage = races(opponent, secondDamageAttack);
         console.log(initialDamage);
-        const opponentDamagePower = item(opponent, initialDamage);
+        const opponentDamagePower = item(opponent, initialDamage.damagePower);
         console.log(opponentDamagePower, opponentDamagePower.chanceDodge);
 
-        if (!opponentDamagePower.chanceDodge) {
-          console.log("Dodge");
-          const currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
-          
+        if (initialDamage.chanceDeflect) {
+          const currenthealth = player.currenthealth - initialDamage.damagePower;
           if (currenthealth <= 0) {
             console.log("Gameover!");
-            console.log(`${player1.name} lost her life.`);
+            console.log(`${player.name} lost her life.`);
+            gameOver = 1;
+            return;
+          } else {
+            player.currenthealth = currenthealth;
+          }
+        }/*  else {
+          const currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
+          if (currenthealth <= 0) {
+            console.log("Gameover!");
+            console.log(`${opponent.name} lost her life.`);
+            gameOver = 1;
+            return;
+          } else {
+            opponent.currenthealth = currenthealth;
+          }
+        } */
+
+        if (!opponentDamagePower.chanceDodge) {
+          const currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
+
+          if (currenthealth <= 0) {
+            console.log("Gameover!");
+            console.log(`${opponent.name} lost her life.`);
             gameOver = 1;
             return;
           } else {
