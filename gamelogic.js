@@ -8,8 +8,6 @@ const player2 = new Person("elf", "boots", "Computer");
 player1.displayChar();
 player2.displayChar();
 
-//player1.currenthealth = 70
-
 let turn = 0;
 let starting = 1;
 let gameOver = 0;
@@ -18,7 +16,6 @@ do {
   counter(turn);
 }
 while (gameOver === 0);
-
 
 function counter(turn) {
 
@@ -94,28 +91,11 @@ function counter(turn) {
     }
 
     console.log(`${player2.name} choose ${move}`);
-    //races(player2, player1);
     checkMove(player2, player1, move);
-    // gameOver = checkGameOver(player2);
-
-    /* if (player2.currenthealth <= 0) {
-      console.log(`Game over! ${player1.name} WON!`);
-    } else if (player2.currenthealth > 0) {
-      console.log(`${player2.name} turn!`);
-    } */
   }
 }
 
 function item(player, damagePower = player.damage()) {
-  /* if (opponent.item === "boots") {
-    const randomLuck = Math.floor(Math.random() * 100 + 1);
-    if (randomLuck <= 1 || randomLuck >= 30) {
-      return
-    } else {
-      console.log(`${opponent.name} is not lucky. She/He can't dodge your attack.`);
-      opponent.currenthealth -= player.damage
-    }
-  } */
   console.log(damagePower);
   if (player.item === "sword") {
     damagePower += damagePower * 0.3;
@@ -241,17 +221,7 @@ function checkMove(player, opponent, move) {
           } else {
             player.currenthealth = currenthealth;
           }
-        }/*  else {
-          const currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
-          if (currenthealth <= 0) {
-            console.log("Gameover!");
-            console.log(`${opponent.name} lost her life.`);
-            gameOver = 1;
-            return;
-          } else {
-            opponent.currenthealth = currenthealth;
-          }
-        } */
+        }
 
         if (!opponentDamagePower.chanceDodge) {
           const currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
@@ -272,7 +242,6 @@ function checkMove(player, opponent, move) {
       } else {
         turn = 0;
       }
-      //gameOver = 1;
       starting = 1;
       counter(turn);
       break;
@@ -327,7 +296,6 @@ function checkGameOver(player, currenthealth) {
     console.log(`${player.name} lost her life.`);
     gameOver = 1;
     return true;
-  } else {
-    return false;
   }
+  return false;
 }
