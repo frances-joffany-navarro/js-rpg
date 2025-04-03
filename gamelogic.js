@@ -55,9 +55,8 @@ function counter(turn) {
     }
 
     console.log(`${player1.name} choose ${move}`);
-    //races(player1, player2);
     checkMove(player1, player2, move);
-    //gameOver = checkGameOver(player1);
+    
   } else {
 
     if (player2.race === "vampire") {
