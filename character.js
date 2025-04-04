@@ -17,19 +17,11 @@ function Person(race, item, name) {
 
   this.heal = function () {
     let healingPower = Math.floor(Math.random() * (this.maxHealing - this.min) + this.min);
-    /* if (this.item === "staff") {
-      healingPower += Math.round(healingPower * 0.2);
-      return healingPower;
-    } */
     return healingPower;
   };
 
   this.damage = function () {
     let damagingPower = Math.floor(Math.random() * (this.maxDamage - this.min) + this.min);
-    /* if (this.item === "sword") {
-      console
-      damagingPower += Math.round(damagingPower * 0.2);
-    } */
     return damagingPower;
   };
 
@@ -41,3 +33,6 @@ function Person(race, item, name) {
 };
 
 export { Person }; 
+
+const createButton = document.querySelector("createButton");
+const playerOneName = document.querySelector("#name");
