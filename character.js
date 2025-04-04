@@ -5,7 +5,7 @@ function Person(race, item, name) {
   this.name = name;
   this.currenthealth = 100;
   this.maxHealth = 100;
-  
+
   if (this.race === "orc") {
     this.maxHealth += this.maxHealth * 0.4;
     this.currenthealth = this.maxHealth;
@@ -32,7 +32,43 @@ function Person(race, item, name) {
   };
 };
 
-export { Person }; 
 
-const createButton = document.querySelector("createButton");
-const playerOneName = document.querySelector("#name");
+
+let playerOne, playerTwo;
+
+const createButton = document.querySelector("#createButton");
+
+const playerDesc = document.querySelector("#playerDescription");
+
+
+const playerName = document.querySelector("#name");
+const playerRace = document.querySelector("#race");
+const playerItem = document.querySelector("#item");
+
+createButton.addEventListener("click", () => {
+  const counter = 1;
+  if (counter = 1) {
+    playerOne = createPlayer(playerRace, playerItem, playerName);
+
+    playerName.value = "";
+    playerItem.value = "";
+    playerRace.value = "";
+
+    playerDesc.innerHTML = "Player 2";
+
+    player
+  } else {
+    playerTwo = createPlayer(playerRace, playerItem, playerName);
+    counter = 0;
+  }
+
+  counter++;
+});
+
+function createPlayer(race, item, name) {
+  return new Person(race, item, name);
+}
+
+
+
+export { Person };
