@@ -34,36 +34,50 @@ function Person(race, item, name) {
 
 
 
-let playerOne, playerTwo;
+let playerOne;
+let playerTwo;
 
-const createButton = document.querySelector("#createButton");
-
+const createButton = document.getElementById("createButton");
 const playerDesc = document.querySelector("#playerDescription");
+const firstPanel = document.getElementById("firstPanel");
+const startPanel = document.getElementById("startPanel");
 
 
 const playerName = document.querySelector("#name");
-const playerRace = document.querySelector("#race");
-const playerItem = document.querySelector("#item");
+const playerRace = document.getElementById("race");
+const playerItem = document.getElementById("item");
+
+
+console.log(playerRace, playerItem, playerName);
+
+playerName.focus();
 
 createButton.addEventListener("click", () => {
-  const counter = 1;
-  if (counter = 1) {
-    playerOne = createPlayer(playerRace, playerItem, playerName);
+  if (playerRace.value != "" && playerItem.value != "" && playerName.value != "") {
+    let counter = 1;
+    if (counter === 1) {
+      playerOne = createPlayer(playerRace.value, playerItem.value, playerName.value);
+      playerOne.displayChar();
 
-    playerName.value = "";
-    playerItem.value = "";
-    playerRace.value = "";
+      playerName.value = "";
+      playerItem.value = "";
+      playerRace.value = "";
+      playerDesc.innerHTML = "Player 2";
+      playerName.focus();
 
-    playerDesc.innerHTML = "Player 2";
+    } else {
+      playerTwo = createPlayer(playerRace.value, playerItem.value, playerName.value);
+      playerTwo.displayChar();
 
-    player
-  } else {
-    playerTwo = createPlayer(playerRace, playerItem, playerName);
-    counter = 0;
+      counter = 0;
+    }
+
+    counter++;
   }
-
-  counter++;
 });
+
+
+
 
 function createPlayer(race, item, name) {
   return new Person(race, item, name);
