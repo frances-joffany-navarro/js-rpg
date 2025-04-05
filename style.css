@@ -1,65 +1,88 @@
-.selector-for-some-widget {box-sizing: content-box;}
+.selector-for-some-widget {
+  box-sizing: content-box;
+}
 
-body{
-    background: url(images/platformer_background_4.png);
-    background-position:center left;
-    background-size:contain;
-    height: 100vh;
-    font-family: 'Black Ops One', cursive;   
+body {
+  background: url(images/platformer_background_4.png);
+  background-position: center left;
+  background-size: contain;
+  height: 100vh;
+  font-family: "Black Ops One", cursive;
 }
 
 .center {
   text-align: center;
 }
 
-.playerName{
+.playerName {
   font-size: 28px;
 }
 
-#player1Stat, #player2Stat{
+#player1Stat,
+#player2Stat {
   text-align: left;
 }
-h2{
-  color: #FFC31A;/*A32D2D - FFC31A*/
-  font-family: 'DotGothic16', sans-serif;
+h2 {
+  color: #ffc31a; /*A32D2D - FFC31A*/
+  font-family: "DotGothic16", sans-serif;
 }
 
-p{
+p {
   color: #493030;
   font-weight: bold;
-  font-family: 'Black Ops One', cursive;
+  font-family: "Black Ops One", cursive;
 }
-h3, .playerName{font-family: 'DotGothic16', sans-serif;}
+h3,
+.playerName {
+  font-family: "DotGothic16", sans-serif;
+}
 
-label{color: white;}
+label {
+  color: white;
+}
 
-#characterInputs1 select, #characterInputs2 select, #characterInputs1 input, #characterInputs2 input{
+#characterInputs1 select,
+#characterInputs2 select,
+#characterInputs1 input,
+#characterInputs2 input {
   background-color: rgb(168, 49, 49);
   color: white;
-  font-family: 'DotGothic16', sans-serif;
+  font-family: "DotGothic16", sans-serif;
 }
 
-#creationPanel button, #startPanel button{
+#creationPanel button,
+#startPanel button {
   background-color: rgb(44, 160, 144);
   color: white;
-  font-family: 'DotGothic16', sans-serif;
+  font-family: "DotGothic16", sans-serif;
 }
 
-#firstPanel{
+#firstPanel {
   background: rgba(220, 255, 254, 0.5);
   height: 455px;
 }
-#secondPanel{background:rgba(105, 204, 215, 0.5);}
-#logPanel, #movesPanel, #startPanel, #formPlayer2, #formPlayer1 {display: none;}
-#player1Stat,#player2Stat{visibility: hidden;}
+#secondPanel {
+  background: rgba(105, 204, 215, 0.5);
+}
+#logPanel,
+#movesPanel,
+#startPanel,
+#formPlayer2,
+#formPlayer1 {
+  display: none;
+}
+#player1Stat,
+#player2Stat {
+  visibility: hidden;
+}
 
-ul{
+ul {
   list-style: none;
   padding-left: 0;
-  font-family:'Courier New', Courier, monospace
+  font-family: "Courier New", Courier, monospace;
 }
-#logList{
-  height: 385px; 
+#logList {
+  height: 385px;
 }
 
 /* width */
@@ -69,16 +92,15 @@ ul{
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: rgba(220, 255, 254, 0.5)/*#f1f1f1*/; 
+  background: rgba(220, 255, 254, 0.5) /*#f1f1f1*/;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgba(44, 160, 144, 0.7); 
+  background: rgba(44, 160, 144, 0.7);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #888 ; 
+  background: #888;
 }
-

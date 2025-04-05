@@ -36,11 +36,18 @@ function Person(race, item, name) {
 
 let playerOne;
 let playerTwo;
+let counter = 1;
 
 const createButton = document.getElementById("createButton");
+const startButton = document.getElementById("startButton");
+const movesPanel = document.getElementById("movesPanel");
 const playerDesc = document.querySelector("#playerDescription");
-const firstPanel = document.getElementById("firstPanel");
+const creationPanel = document.getElementById("creationPanel");
 const startPanel = document.getElementById("startPanel");
+const logPanel = document.getElementById("logPanel");
+const playerOneStat = document.getElementById("player1Stat");
+const playerTwoStat = document.getElementById("player2Stat");
+
 
 
 const playerName = document.querySelector("#name");
@@ -54,7 +61,8 @@ playerName.focus();
 
 createButton.addEventListener("click", () => {
   if (playerRace.value != "" && playerItem.value != "" && playerName.value != "") {
-    let counter = 1;
+
+    console.log(counter);
     if (counter === 1) {
       playerOne = createPlayer(playerRace.value, playerItem.value, playerName.value);
       playerOne.displayChar();
@@ -68,12 +76,22 @@ createButton.addEventListener("click", () => {
     } else {
       playerTwo = createPlayer(playerRace.value, playerItem.value, playerName.value);
       playerTwo.displayChar();
+      console.log(creationPanel);
+      creationPanel.style.display = "none";
+      startPanel.style.display = "inline-block";
 
-      counter = 0;
+      counter = 1;
     }
 
     counter++;
   }
+});
+startButton.addEventListener("click", () => {
+  startPanel.style.display = "none";
+  logPanel.style.display = "inline-block";
+  movesPanel.style.display = "inline-block";
+  playerOneStat.style.visibility = "visible";
+  playerTwoStat.style.visibility = "visible";
 });
 
 
