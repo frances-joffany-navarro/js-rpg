@@ -14,6 +14,8 @@ let gameOver = 0;
 
 do {
   counter(turn);
+  
+
 }
 while (gameOver === 0);
 
@@ -45,18 +47,19 @@ function counter(turn) {
     console.log(`${player1.name} turn!`);
     console.log(`Player 1's Current Health: ${player1.currenthealth}`);
     console.log(`Player 2's Current Health: ${player2.currenthealth}`);
+    
 
 
-    if (starting === 1) {
+    /* if (starting === 1) {
       move = prompt("What is your move? \n 1 - Attack \n 2 - Heal \n 3 - Surrender \n Please enter the number:");
       starting = 0;
     } else {
       move = prompt("Please try again! What is your move? \n 1 - Attack \n 2 - Heal \n 3 - Surrender \n Please enter the number:");
-    }
+    } */
 
-    console.log(`${player1.name} choose ${move}`);
-    checkMove(player1, player2, move);
-    
+    //console.log(`${player1.name} choose ${move}`);
+    //checkMove(player1, player2, move);
+
   } else {
 
     if (player2.race === "vampire") {
@@ -82,15 +85,15 @@ function counter(turn) {
     console.log(`Player 1's Current Health: ${player1.currenthealth}`);
     console.log(`Player 2's Current Health: ${player2.currenthealth}`);
 
-    if (starting === 1) {
+    /* if (starting === 1) {
       move = prompt("What is your move? \n 1 - Attack \n 2 - Heal \n 3 - Surrender \n Please enter the number:");
       starting = 0;
     } else {
       move = prompt("Please try again! What is your move? \n 1 - Attack \n 2 - Heal \n 3 - Surrender \n Please enter the number:");
-    }
+    } */
 
-    console.log(`${player2.name} choose ${move}`);
-    checkMove(player2, player1, move);
+    //console.log(`${player2.name} choose ${move}`);
+    //checkMove(player2, player1, move);
   }
 }
 

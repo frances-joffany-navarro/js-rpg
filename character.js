@@ -54,6 +54,14 @@ const playerName = document.querySelector("#name");
 const playerRace = document.getElementById("race");
 const playerItem = document.getElementById("item");
 
+const playerOneAttack = document.querySelector("#hit1");
+const playerOneHeal = document.querySelector("#heal1");
+const playerOneYield = document.querySelector("#yield1");
+
+const playerTwoAttack = document.querySelector("#hit1");
+const playerTwoHeal = document.querySelector("#heal1");
+const playerTwoYield = document.querySelector("#yield1");
+
 
 console.log(playerRace, playerItem, playerName);
 
@@ -93,8 +101,6 @@ startButton.addEventListener("click", () => {
   playerOneStat.style.visibility = "visible";
   playerTwoStat.style.visibility = "visible";
 });
-
-
 
 
 function createPlayer(race, item, name) {
