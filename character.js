@@ -34,9 +34,10 @@ function Person(race, item, name) {
 
 
 
-let playerOne;
-let playerTwo;
+let player1;
+let player2;
 let counter = 1;
+let starting = false;
 
 const createButton = document.getElementById("createButton");
 const startButton = document.getElementById("startButton");
@@ -58,9 +59,9 @@ const playerOneAttack = document.querySelector("#hit1");
 const playerOneHeal = document.querySelector("#heal1");
 const playerOneYield = document.querySelector("#yield1");
 
-const playerTwoAttack = document.querySelector("#hit1");
-const playerTwoHeal = document.querySelector("#heal1");
-const playerTwoYield = document.querySelector("#yield1");
+const playerTwoAttack = document.querySelector("#hit2");
+const playerTwoHeal = document.querySelector("#heal2");
+const playerTwoYield = document.querySelector("#yield2");
 
 
 console.log(playerRace, playerItem, playerName);
@@ -72,8 +73,8 @@ createButton.addEventListener("click", () => {
 
     console.log(counter);
     if (counter === 1) {
-      playerOne = createPlayer(playerRace.value, playerItem.value, playerName.value);
-      playerOne.displayChar();
+      player1 = createPlayer(playerRace.value, playerItem.value, playerName.value);
+      player1.displayChar();
 
       playerName.value = "";
       playerItem.value = "";
@@ -82,8 +83,8 @@ createButton.addEventListener("click", () => {
       playerName.focus();
 
     } else {
-      playerTwo = createPlayer(playerRace.value, playerItem.value, playerName.value);
-      playerTwo.displayChar();
+      player2 = createPlayer(playerRace.value, playerItem.value, playerName.value);
+      player2.displayChar();
       console.log(creationPanel);
       creationPanel.style.display = "none";
       startPanel.style.display = "inline-block";
@@ -100,6 +101,7 @@ startButton.addEventListener("click", () => {
   movesPanel.style.display = "inline-block";
   playerOneStat.style.visibility = "visible";
   playerTwoStat.style.visibility = "visible";
+  starting = true;
 });
 
 
@@ -109,4 +111,4 @@ function createPlayer(race, item, name) {
 
 
 
-export { Person };
+export { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield };

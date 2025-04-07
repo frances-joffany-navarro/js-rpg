@@ -1,29 +1,37 @@
 //import { getCurrentInstance } from "vue";
-import { Person } from "./character.js";
+import { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield } from "./character.js";
 
 //Initialize Temporary Characters
-const player1 = new Person("human", "bow", "Frances");
-const player2 = new Person("elf", "boots", "Computer");
+//const player1 = new Person("human", "bow", "Frances");
+//const player2 = new Person("elf", "boots", "Computer");
 
-player1.displayChar();
-player2.displayChar();
+//player1.displayChar();
+//player2.displayChar();
 
 let turn = 0;
-let starting = 1;
+
 let gameOver = 0;
+console.log(player1, player2);
 
-do {
-  counter(turn);
-  
-
+if (player1 != "" && player2 != "") {
+  do {
+    counter(turn);
+  }
+  while (gameOver === 0);
 }
-while (gameOver === 0);
+
 
 function counter(turn) {
 
   let move;
 
   if (turn == 0) {
+
+    playerTwoAttack.disabled = true;
+    playerTwoHeal.disabled = true;
+    playerTwoYield.disabled = true;
+
+
     if (player1.race === "vampire") {
       const lifeStealFromOpponent = Math.round(player2.currenthealth * 0.1);
       const p1CurrentHealth = player1.currenthealth + lifeStealFromOpponent;
@@ -47,7 +55,8 @@ function counter(turn) {
     console.log(`${player1.name} turn!`);
     console.log(`Player 1's Current Health: ${player1.currenthealth}`);
     console.log(`Player 2's Current Health: ${player2.currenthealth}`);
-    
+
+
 
 
     /* if (starting === 1) {
