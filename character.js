@@ -55,6 +55,8 @@ const playerName = document.querySelector("#name");
 const playerRace = document.getElementById("race");
 const playerItem = document.getElementById("item");
 
+const playersVisual = document.getElementById("playersVisual");
+
 const playerOneAttack = document.querySelector("#hit1");
 const playerOneHeal = document.querySelector("#heal1");
 const playerOneYield = document.querySelector("#yield1");
@@ -62,6 +64,17 @@ const playerOneYield = document.querySelector("#yield1");
 const playerTwoAttack = document.querySelector("#hit2");
 const playerTwoHeal = document.querySelector("#heal2");
 const playerTwoYield = document.querySelector("#yield2");
+
+const playerOneStatName = document.getElementById("showName1");
+const playerTwoStatName = document.getElementById("showName2");
+const playerOneStatHealth = document.getElementById("p1Health");
+const playerTwoStatHealth = document.getElementById("p2Health");
+const playerOneStatItem = document.getElementById("itemImage1");
+const playerTwoStatItem = document.getElementById("itemImage2");
+const playerOneStatVisual = document.getElementById("player1Visual");
+const playerTwoStatVisual = document.getElementById("player2Visual");
+
+
 
 
 console.log(playerRace, playerItem, playerName);
@@ -95,13 +108,28 @@ createButton.addEventListener("click", () => {
     counter++;
   }
 });
+
 startButton.addEventListener("click", () => {
   startPanel.style.display = "none";
   logPanel.style.display = "inline-block";
   movesPanel.style.display = "inline-block";
+  playersVisual.style.display = "inline-block";
   playerOneStat.style.visibility = "visible";
   playerTwoStat.style.visibility = "visible";
   starting = true;
+  playerOneStatName.innerHTML = player1.name;
+  playerTwoStatName.innerHTML = player2.name;
+  playerOneStatHealth.innerHTML = `${player1.currenthealth} %`
+  playerTwoStatHealth.innerHTML = `${player2.currenthealth} %`
+  playerOneStatItem.src = imageItem(player1.item);
+  playerTwoStatItem.src = imageItem(player2.item);
+  playerOneStatVisual.src = imageRace(player1.race);
+  playerTwoStatVisual.src = imageRace(player2.race);
+
+
+
+
+
 });
 
 
@@ -109,6 +137,60 @@ function createPlayer(race, item, name) {
   return new Person(race, item, name);
 }
 
+function imageItem(item) {
+  const path = "images/"
+  let srcName = "";
+  switch (item) {
+    case "bow":
+      srcName = "bow.png";
+      break;
+
+    case "boots":
+      srcName = "boots.png";
+      break;
+
+    case "sword":
+      srcName = "sword.png";
+      break;
+
+    case "staff":
+      srcName = "magic-wand.png";
+      break;
+
+    default:
+
+      break;
+  }
+  return path + srcName;
+}
+
+function imageRace(race) {
+  const path = "images/"
+  let srcName = "";
+  switch (race) {
+    case "human":
+      srcName = "human.png";
+      break;
+
+    case "orc":
+      srcName = "orc.png";
+      break;
+
+    case "elf":
+      srcName = "elf.png";
+      break;
+
+    case "vampire":
+      srcName = "vampire.png";
+      break;
+
+    default:
+
+      break;
+  }
+  return path + srcName;
+}
 
 
-export { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield };
+
+export { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton };

@@ -68,12 +68,21 @@ label {
 #movesPanel,
 #startPanel,
 #formPlayer2,
-#formPlayer1 {
+#formPlayer1,
+#playersVisual {
   display: none;
 }
 #player1Stat,
 #player2Stat {
   visibility: hidden;
+}
+
+#visual {
+  height: 300px;
+}
+
+#visual img {
+  height: 150px;
 }
 
 ul {

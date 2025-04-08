@@ -1,5 +1,5 @@
 //import { getCurrentInstance } from "vue";
-import { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield } from "./character.js";
+import { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton } from "./character.js";
 
 //Initialize Temporary Characters
 //const player1 = new Person("human", "bow", "Frances");
@@ -13,7 +13,8 @@ let turn = 0;
 let gameOver = 0;
 console.log(player1, player2);
 
-if (player1 != "" && player2 != "") {
+if (player1 != null && player2 != null) {
+  console.log(player1, player2);
   do {
     counter(turn);
   }
@@ -24,6 +25,8 @@ if (player1 != "" && player2 != "") {
 function counter(turn) {
 
   let move;
+
+
 
   if (turn == 0) {
 
