@@ -13,20 +13,19 @@ let turn = 0;
 let gameOver = 0;
 console.log(player1, player2);
 
-if (player1 != null && player2 != null) {
-  console.log(player1, player2);
-  do {
-    counter(turn);
-  }
-  while (gameOver === 0);
+//if (player1 != null && player2 != null) {
+//  console.log(player1, player2);
+do {
+
+  counter(turn);
 }
+while (gameOver === 0);
+//}
 
 
 function counter(turn) {
 
   let move;
-
-
 
   if (turn == 0) {
 
@@ -59,7 +58,9 @@ function counter(turn) {
     console.log(`Player 1's Current Health: ${player1.currenthealth}`);
     console.log(`Player 2's Current Health: ${player2.currenthealth}`);
 
+    playerOneYield.addEventListener("click", () => {
 
+    });
 
 
     /* if (starting === 1) {
@@ -73,6 +74,9 @@ function counter(turn) {
     //checkMove(player1, player2, move);
 
   } else {
+    playerOneAttack.disabled = true;
+    playerOneHeal.disabled = true;
+    playerOneYield.disabled = true;
 
     if (player2.race === "vampire") {
       const lifeStealFromOpponent = Math.round(player1.currenthealth * 0.1);
@@ -313,3 +317,5 @@ function checkGameOver(player, currenthealth) {
   }
   return false;
 }
+
+export { counter };

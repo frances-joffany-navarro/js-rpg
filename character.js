@@ -1,4 +1,5 @@
 //Use this script to generate your character
+
 function Person(race, item, name) {
   this.race = race;
   this.item = item;
@@ -36,7 +37,7 @@ function Person(race, item, name) {
 
 let player1;
 let player2;
-let counter = 1;
+let createCounter = 1;
 let starting = false;
 
 const createButton = document.getElementById("createButton");
@@ -48,8 +49,6 @@ const startPanel = document.getElementById("startPanel");
 const logPanel = document.getElementById("logPanel");
 const playerOneStat = document.getElementById("player1Stat");
 const playerTwoStat = document.getElementById("player2Stat");
-
-
 
 const playerName = document.querySelector("#name");
 const playerRace = document.getElementById("race");
@@ -74,9 +73,6 @@ const playerTwoStatItem = document.getElementById("itemImage2");
 const playerOneStatVisual = document.getElementById("player1Visual");
 const playerTwoStatVisual = document.getElementById("player2Visual");
 
-
-
-
 console.log(playerRace, playerItem, playerName);
 
 playerName.focus();
@@ -84,8 +80,8 @@ playerName.focus();
 createButton.addEventListener("click", () => {
   if (playerRace.value != "" && playerItem.value != "" && playerName.value != "") {
 
-    console.log(counter);
-    if (counter === 1) {
+    console.log(createCounter);
+    if (createCounter === 1) {
       player1 = createPlayer(playerRace.value, playerItem.value, playerName.value);
       player1.displayChar();
 
@@ -102,10 +98,10 @@ createButton.addEventListener("click", () => {
       creationPanel.style.display = "none";
       startPanel.style.display = "inline-block";
 
-      counter = 1;
+      createCounter = 1;
     }
 
-    counter++;
+    createCounter++;
   }
 });
 
@@ -125,11 +121,6 @@ startButton.addEventListener("click", () => {
   playerTwoStatItem.src = imageItem(player2.item);
   playerOneStatVisual.src = imageRace(player1.race);
   playerTwoStatVisual.src = imageRace(player2.race);
-
-
-
-
-
 });
 
 
