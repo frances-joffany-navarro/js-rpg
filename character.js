@@ -1,4 +1,5 @@
 //Use this script to generate your character
+import { checkMove } from "./gamelogic.js";
 
 function Person(race, item, name) {
   this.race = race;
@@ -33,12 +34,11 @@ function Person(race, item, name) {
   };
 };
 
-
-
 let player1;
 let player2;
 let createCounter = 1;
 let starting = false;
+let move;
 
 const createButton = document.getElementById("createButton");
 const startButton = document.getElementById("startButton");
@@ -72,8 +72,6 @@ const playerOneStatItem = document.getElementById("itemImage1");
 const playerTwoStatItem = document.getElementById("itemImage2");
 const playerOneStatVisual = document.getElementById("player1Visual");
 const playerTwoStatVisual = document.getElementById("player2Visual");
-
-console.log(playerRace, playerItem, playerName);
 
 playerName.focus();
 
@@ -122,6 +120,37 @@ startButton.addEventListener("click", () => {
   playerOneStatVisual.src = imageRace(player1.race);
   playerTwoStatVisual.src = imageRace(player2.race);
 });
+
+playerOneAttack.addEventListener("click", () => {
+  move = "1";
+  checkMove(player2, player1, move);
+});
+
+playerOneHeal.addEventListener("click", () => {
+  move = "2";
+  checkMove(player2, player1, move);
+});
+
+playerOneYield.addEventListener("click", () => {
+  move = "3";
+  checkMove(player2, player1, move);
+});
+
+playerTwoAttack.addEventListener("click", () => {
+  move = "1";
+  checkMove(player2, player1, move);
+});
+
+playerTwoHeal.addEventListener("click", () => {
+  move = "2";
+  checkMove(player2, player1, move);
+});
+
+playerTwoYield.addEventListener("click", () => {
+  move = "3";
+  checkMove(player2, player1, move);
+});
+
 
 
 function createPlayer(race, item, name) {
@@ -184,4 +213,4 @@ function imageRace(race) {
 
 
 
-export { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton };
+export { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move };

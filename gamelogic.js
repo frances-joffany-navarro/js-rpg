@@ -1,5 +1,4 @@
-//import { getCurrentInstance } from "vue";
-import { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton } from "./character.js";
+import { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move } from "./character.js";
 
 //Initialize Temporary Characters
 //const player1 = new Person("human", "bow", "Frances");
@@ -11,27 +10,34 @@ import { Person, player1, player2, starting, playerOneAttack, playerOneHeal, pla
 let turn = 0;
 
 let gameOver = 0;
-console.log(player1, player2);
+//console.log(player1, player2);
 
 //if (player1 != null && player2 != null) {
-//  console.log(player1, player2);
-do {
+//if (starting) {
 
-  counter(turn);
-}
-while (gameOver === 0);
+//  console.log(player1, player2);
+
+setTimeout(() => {
+  console.log(player1, player2); // 2
+  do {
+    counter(turn);
+  }
+  while (gameOver === 0);
+}, 10);
+
+
 //}
 
 
 function counter(turn) {
 
-  let move;
+  //let move;
 
   if (turn == 0) {
 
-    playerTwoAttack.disabled = true;
-    playerTwoHeal.disabled = true;
-    playerTwoYield.disabled = true;
+    // playerTwoAttack.disabled = true;
+    // playerTwoHeal.disabled = true;
+    //playerTwoYield.disabled = true;
 
 
     if (player1.race === "vampire") {
@@ -57,11 +63,6 @@ function counter(turn) {
     console.log(`${player1.name} turn!`);
     console.log(`Player 1's Current Health: ${player1.currenthealth}`);
     console.log(`Player 2's Current Health: ${player2.currenthealth}`);
-
-    playerOneYield.addEventListener("click", () => {
-
-    });
-
 
     /* if (starting === 1) {
       move = prompt("What is your move? \n 1 - Attack \n 2 - Heal \n 3 - Surrender \n Please enter the number:");
@@ -318,4 +319,6 @@ function checkGameOver(player, currenthealth) {
   return false;
 }
 
-export { counter };
+
+
+export { checkMove };
