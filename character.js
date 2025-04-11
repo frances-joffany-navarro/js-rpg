@@ -211,6 +211,9 @@ function imageRace(race) {
   return path + srcName;
 }
 
+function gameOver(isGameOver) {
+  
+}
 
 
 export { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move };

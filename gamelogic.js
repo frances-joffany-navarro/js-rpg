@@ -19,11 +19,11 @@ let gameOver = 0;
 
 setTimeout(() => {
   console.log(player1, player2); // 2
-  do {
+  //do {
     counter(turn);
-  }
-  while (gameOver === 0);
-}, 10);
+  //}
+  //while (gameOver === 0);
+}, 20000);
 
 
 //}
@@ -34,10 +34,13 @@ function counter(turn) {
   //let move;
 
   if (turn == 0) {
+    playerOneAttack.disabled = false;
+    playerOneHeal.disabled = false;
+    playerOneYield.disabled = false;
 
-    // playerTwoAttack.disabled = true;
-    // playerTwoHeal.disabled = true;
-    //playerTwoYield.disabled = true;
+    playerTwoAttack.disabled = true;
+    playerTwoHeal.disabled = true;
+    playerTwoYield.disabled = true;
 
 
     if (player1.race === "vampire") {
@@ -79,6 +82,10 @@ function counter(turn) {
     playerOneHeal.disabled = true;
     playerOneYield.disabled = true;
 
+    playerTwoAttack.disabled = false;
+    playerTwoHeal.disabled = false;
+    playerTwoYield.disabled = false;
+
     if (player2.race === "vampire") {
       const lifeStealFromOpponent = Math.round(player1.currenthealth * 0.1);
       const p1CurrentHealth = player1.currenthealth - lifeStealFromOpponent;
@@ -117,7 +124,7 @@ function counter(turn) {
 function item(player, damagePower = player.damage()) {
   console.log(damagePower);
   if (player.item === "sword") {
-    damagePower += damagePower * 0.3;
+    damagePower += Math.round(damagePower * 0.3);
     return { damagePower, chanceAttack: false, chanceDodge: false };
   } else if (player.item === "bow") {
     const luckNumber = randomLuck();
@@ -261,7 +268,7 @@ function checkMove(player, opponent, move) {
       } else {
         turn = 0;
       }
-      starting = 1;
+      //starting = 1;
       counter(turn);
       break;
 
@@ -292,7 +299,7 @@ function checkMove(player, opponent, move) {
         } else {
           turn = 0;
         }
-        starting = 1;
+        //starting = 1;
         counter(turn);
       }
       break;
@@ -318,7 +325,5 @@ function checkGameOver(player, currenthealth) {
   }
   return false;
 }
-
-
 
 export { checkMove };
