@@ -1,4 +1,4 @@
-import { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move } from "./character.js";
+import { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver } from "./character.js";
 
 //Initialize Temporary Characters
 //const player1 = new Person("human", "bow", "Frances");
@@ -9,7 +9,7 @@ import { Person, player1, player2, starting, playerOneAttack, playerOneHeal, pla
 
 let turn = 0;
 
-let gameOver = 0;
+let isGameOver = false;
 //console.log(player1, player2);
 
 //if (player1 != null && player2 != null) {
@@ -20,7 +20,7 @@ let gameOver = 0;
 setTimeout(() => {
   console.log(player1, player2); // 2
   //do {
-    counter(turn);
+  counter(turn);
   //}
   //while (gameOver === 0);
 }, 20000);
@@ -58,7 +58,8 @@ function counter(turn) {
       if (p2CurrentHealth <= 0) {
         console.log("Gameover!");
         console.log(`${player2.name} lost her life.`);
-        gameOver = 1;
+        isGameOver = true;
+        gameOver(isGameOver);
       } else {
         player2.currenthealth = p2CurrentHealth;
       }
@@ -100,7 +101,8 @@ function counter(turn) {
       if (p1CurrentHealth <= 0) {
         console.log("Gameover!");
         console.log(`${player1.name} lost her life.`);
-        gameOver = 1;
+        isGameOver = true;
+        gameOver(isGameOver);
       } else {
         player1.currenthealth = p1CurrentHealth;
       }
@@ -171,8 +173,9 @@ function races(player, damagePower) {
       console.log(`${player.name} is not lucky. She/He can't deflect your attack.`);
       hasChanceDeflect = false;
     }
-
     return { damagePower, chanceDeflect: hasChanceDeflect };
+  } else {
+    return { damagePower };
   }
 }
 
@@ -187,6 +190,7 @@ function checkMove(player, opponent, move) {
       console.log(`${player.name} wants to attack opponent`);
       const playerDamagePower = item(player);
       console.log(playerDamagePower);
+      console.log(opponent, playerDamagePower.damagePower);
       const initialDamage = races(opponent, playerDamagePower.damagePower);
       console.log(initialDamage);
       const opponentDamagePower = item(opponent, initialDamage.damagePower);
@@ -197,7 +201,8 @@ function checkMove(player, opponent, move) {
         if (currenthealth <= 0) {
           console.log("Gameover!");
           console.log(`${player.name} lost her life.`);
-          gameOver = 1;
+          isGameOver = true;
+          gameOver(isGameOver);
           return;
         } else {
           player.currenthealth = currenthealth;
@@ -207,7 +212,8 @@ function checkMove(player, opponent, move) {
         if (currenthealth <= 0) {
           console.log("Gameover!");
           console.log(`${opponent.name} lost her life.`);
-          gameOver = 1;
+          isGameOver = true;
+          gameOver(isGameOver);
           return;
         } else {
           opponent.currenthealth = currenthealth;
@@ -220,7 +226,8 @@ function checkMove(player, opponent, move) {
         if (currenthealth <= 0) {
           console.log("Gameover!");
           console.log(`${opponent.name} lost her life.`);
-          gameOver = 1;
+          isGameOver = true;
+          gameOver(isGameOver);
           return;
         } else {
           opponent.currenthealth = currenthealth;
@@ -242,7 +249,8 @@ function checkMove(player, opponent, move) {
           if (currenthealth <= 0) {
             console.log("Gameover!");
             console.log(`${player.name} lost her life.`);
-            gameOver = 1;
+            isGameOver = true;
+            gameOver(isGameOver);
             return;
           } else {
             player.currenthealth = currenthealth;
@@ -255,7 +263,8 @@ function checkMove(player, opponent, move) {
           if (currenthealth <= 0) {
             console.log("Gameover!");
             console.log(`${opponent.name} lost her life.`);
-            gameOver = 1;
+            isGameOver = true;
+            gameOver(isGameOver);
             return;
           } else {
             opponent.currenthealth = currenthealth;
@@ -306,7 +315,8 @@ function checkMove(player, opponent, move) {
 
     case "3":
       console.log(`${player.name} has surrendered \n${opponent.name} Won!`);
-      gameOver = 1;
+      isGameOver = true;
+      gameOver(isGameOver);
       break;
 
     default:
@@ -320,7 +330,8 @@ function checkGameOver(player, currenthealth) {
   if (currenthealth <= 0) {
     console.log("Gameover!");
     console.log(`${player.name} lost her life.`);
-    gameOver = 1;
+    isGameOver = true;
+    gameOver(isGameOver);
     return true;
   }
   return false;

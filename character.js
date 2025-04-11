@@ -123,17 +123,17 @@ startButton.addEventListener("click", () => {
 
 playerOneAttack.addEventListener("click", () => {
   move = "1";
-  checkMove(player2, player1, move);
+  checkMove(player1, player2, move);
 });
 
 playerOneHeal.addEventListener("click", () => {
   move = "2";
-  checkMove(player2, player1, move);
+  checkMove(player1, player2, move);
 });
 
 playerOneYield.addEventListener("click", () => {
   move = "3";
-  checkMove(player2, player1, move);
+  checkMove(player1, player2, move);
 });
 
 playerTwoAttack.addEventListener("click", () => {
@@ -212,8 +212,16 @@ function imageRace(race) {
 }
 
 function gameOver(isGameOver) {
-  
+  if (isGameOver){
+    playerOneAttack.disabled = true;
+    playerOneHeal.disabled = true;
+    playerOneYield.disabled = true;
+
+    playerTwoAttack.disabled = true;
+    playerTwoHeal.disabled = true;
+    playerTwoYield.disabled = true;
+  }
 }
 
 
-export { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move };
+export { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver };
