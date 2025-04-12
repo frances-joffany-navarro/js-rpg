@@ -212,7 +212,7 @@ function imageRace(race) {
 }
 
 function gameOver(isGameOver) {
-  if (isGameOver){
+  if (isGameOver) {
     playerOneAttack.disabled = true;
     playerOneHeal.disabled = true;
     playerOneYield.disabled = true;
@@ -224,4 +224,4 @@ function gameOver(isGameOver) {
 }
 
 
-export { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver };
+export { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver, playerOneStatHealth, playerTwoStatHealth};

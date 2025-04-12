@@ -1,4 +1,4 @@
-import { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver } from "./character.js";
+import { Person, player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver, playerOneStatHealth, playerTwoStatHealth } from "./character.js";
 
 //Initialize Temporary Characters
 //const player1 = new Person("human", "bow", "Frances");
@@ -18,9 +18,19 @@ let isGameOver = false;
 //  console.log(player1, player2);
 
 setTimeout(() => {
-  console.log(player1, player2); // 2
+  console.log(player1, player2); // 
+
+  playerOneStatHealth.ariaValueNow = player1.currenthealth;
+  playerOneStatHealth.ariaValueMax = player1.maxHealth;
+  playerOneStatHealth.style.width = `${player1.currenthealth}%`
+
+  playerTwoStatHealth.ariaValueNow = player2.currenthealth;
+  playerTwoStatHealth.ariaValueMax = player2.maxHealth;
+  playerTwoStatHealth.style.width = `${player2.currenthealth}%`
+
   //do {
   counter(turn);
+
   //}
   //while (gameOver === 0);
 }, 20000);
@@ -51,17 +61,29 @@ function counter(turn) {
 
       if (p1CurrentHealth > player1.maxHealth) {
         player1.currenthealth = player1.maxHealth;
+
+        playerOneStatHealth.ariaValueNow = player1.currenthealth;
+        playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player1.currenthealth}%`;
       } else {
         player1.currenthealth = p1CurrentHealth;
+
+        playerOneStatHealth.ariaValueNow = player1.currenthealth;
+        playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player1.currenthealth}%`;
       }
 
       if (p2CurrentHealth <= 0) {
+        player2.currenthealth = 0;
+        playerTwoStatHealth.ariaValueNow = player2.currenthealth;
+        playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player2.currenthealth}%`;
         console.log("Gameover!");
         console.log(`${player2.name} lost her life.`);
         isGameOver = true;
         gameOver(isGameOver);
       } else {
         player2.currenthealth = p2CurrentHealth;
+
+        playerTwoStatHealth.ariaValueNow = player2.currenthealth;
+        playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player2.currenthealth}%`;
       }
     }
     console.log(`${player1.name} turn!`);
@@ -93,18 +115,29 @@ function counter(turn) {
       const p2CurrentHealth = player2.currenthealth + lifeStealFromOpponent;
 
       if (p2CurrentHealth > player2.maxHealth) {
-        player1.currenthealth = player1.maxHealth;
+        player2.currenthealth = player2.maxHealth;
+
+        playerTwoStatHealth.ariaValueNow = player2.currenthealth;
+        playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player2.currenthealth}%`;
       } else {
         player2.currenthealth = p2CurrentHealth;
+        playerTwoStatHealth.ariaValueNow = player2.currenthealth;
+        playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player2.currenthealth}%`;
       }
 
       if (p1CurrentHealth <= 0) {
+        p1CurrentHealth = 0;
+        playerOneStatHealth.ariaValueNow = player1.currenthealth;
+        playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player1.currenthealth}%`;
+
         console.log("Gameover!");
         console.log(`${player1.name} lost her life.`);
         isGameOver = true;
         gameOver(isGameOver);
       } else {
         player1.currenthealth = p1CurrentHealth;
+        playerOneStatHealth.ariaValueNow = player1.currenthealth;
+        playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player1.currenthealth}%`;
       }
     }
     console.log(`${player2.name} turn!`);
@@ -182,6 +215,11 @@ function races(player, damagePower) {
 function randomLuck() {
   return Math.floor(Math.random() * 100 + 1);
 }
+
+/* function playerStatHealth(player, currenthealth){
+  playerOneStatHealth.ariaValueNow = player1.currenthealth;
+  playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player1.currenthealth}%`;
+} */
 
 function checkMove(player, opponent, move) {
   switch (move) {
