@@ -73,6 +73,8 @@ const playerTwoStatItem = document.getElementById("itemImage2");
 const playerOneStatVisual = document.getElementById("player1Visual");
 const playerTwoStatVisual = document.getElementById("player2Visual");
 
+const gameLog = document.getElementById("logs");
+
 playerName.focus();
 
 createButton.addEventListener("click", () => {
@@ -224,4 +226,4 @@ function gameOver(isGameOver) {
 }
 
 
-export {player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver, playerOneStatHealth, playerTwoStatHealth};
+export {player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog};
