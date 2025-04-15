@@ -225,7 +225,7 @@ function checkMove(player, opponent, move) {
           player.currenthealth = currenthealth;
         }
       } else {
-        playerLog(`${opponent} cannot deflect ${player}'s attack.`)
+        playerLog(`${opponent.name} cannot deflect ${player.name}'s attack.`)
         const currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
         if (currenthealth <= 0) {
           console.log("Gameover!");
