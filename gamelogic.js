@@ -33,13 +33,16 @@ setTimeout(() => {
 
 
 function counter(turn) {
-
-
   if (turn == 0) {
     playerLog(`${player1.name} turn!`);
 
+    if (player1.currenthealth === player1.maxHealth) {
+      playerOneHeal.disabled = true;
+    } else {
+      playerOneHeal.disabled = false;
+    }
+
     playerOneAttack.disabled = false;
-    playerOneHeal.disabled = false;
     playerOneYield.disabled = false;
 
     playerTwoAttack.disabled = true;
@@ -48,7 +51,7 @@ function counter(turn) {
 
 
     if (player1.race === "vampire") {
-      playerLog(`${player1.name} steal life from ${player2.name}`)
+      playerLog(`${player1.name} steal life from ${player2.name}`);
 
       const lifeStealFromOpponent = Math.round(player2.currenthealth * 0.1);
       const p1CurrentHealth = player1.currenthealth + lifeStealFromOpponent;
@@ -57,7 +60,8 @@ function counter(turn) {
 
       if (p1CurrentHealth > player1.maxHealth) {
         player1.currenthealth = player1.maxHealth;
-
+        
+        playerOneHeal.disabled = true;
         playerOneStatHealth.ariaValueNow = player1.currenthealth;
         playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player1.currenthealth}%`;
       } else {
@@ -83,12 +87,14 @@ function counter(turn) {
       }
     }
 
-    //console.log(`Player 1's Current Health: ${player1.currenthealth}`);
-    //console.log(`Player 2's Current Health: ${player2.currenthealth}`);
-
   } else {
 
     playerLog(`${player2.name} turn!`);
+    if (player2.currenthealth === player2.maxHealth) {
+      playerTwoHeal.disabled = true;
+    } else {
+      playerTwoHeal.disabled = false;
+    }
 
     playerOneAttack.disabled = true;
     playerOneHeal.disabled = true;
@@ -99,7 +105,7 @@ function counter(turn) {
     playerTwoYield.disabled = false;
 
     if (player2.race === "vampire") {
-      playerLog(`${player2.name} steal life from ${player1.name}`)
+      playerLog(`${player2.name} steal life from ${player1.name}`);
 
       const lifeStealFromOpponent = Math.round(player1.currenthealth * 0.1);
       const p1CurrentHealth = player1.currenthealth - lifeStealFromOpponent;
@@ -108,16 +114,21 @@ function counter(turn) {
       if (p2CurrentHealth > player2.maxHealth) {
         player2.currenthealth = player2.maxHealth;
 
+        playerTwoHeal.disabled = true;
         playerTwoStatHealth.ariaValueNow = player2.currenthealth;
         playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player2.currenthealth}%`;
       } else {
+
         player2.currenthealth = p2CurrentHealth;
+
         playerTwoStatHealth.ariaValueNow = player2.currenthealth;
         playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player2.currenthealth}%`;
       }
 
       if (p1CurrentHealth <= 0) {
+
         p1CurrentHealth = 0;
+
         playerOneStatHealth.ariaValueNow = player1.currenthealth;
         playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player1.currenthealth}%`;
 
@@ -213,7 +224,7 @@ function checkMove(player, opponent, move) {
       console.log(opponentDamagePower, opponentDamagePower.chanceDodge);
 
       if (initialDamage.chanceDeflect) {
-        playerLog(`${opponent} deflect ${player}'s attack.`)
+        playerLog(`${opponent.name} deflect ${player.name}'s attack.`);
         const currenthealth = player.currenthealth - initialDamage.damagePower;
         if (currenthealth <= 0) {
           console.log("Gameover!");
@@ -225,7 +236,7 @@ function checkMove(player, opponent, move) {
           player.currenthealth = currenthealth;
         }
       } else {
-        playerLog(`${opponent.name} cannot deflect ${player.name}'s attack.`)
+        playerLog(`${opponent.name} cannot deflect ${player.name}'s attack.`);
         const currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
         if (currenthealth <= 0) {
           console.log("Gameover!");
@@ -248,11 +259,11 @@ function checkMove(player, opponent, move) {
       }
 
       if (!opponentDamagePower.chanceDodge) {
+        playerLog(`${opponent.name} cannot dodge ${player.name}'s attack.`);
         const currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
-        //const isGameOver = checkGameOver(currenthealth);
         if (currenthealth <= 0) {
           console.log("Gameover!");
-          console.log(`${opponent.name} lost her life.`);
+          playerLog(`Gameover! ${opponent.name} lost her life.`);
 
           if (turn === 0) {
             playerTwoStatHealth.ariaValueNow = opponent.currenthealth;
@@ -272,7 +283,7 @@ function checkMove(player, opponent, move) {
 
       //check chance attack
       if (playerDamagePower.chanceAttack) {
-
+        playerLog(`${player.name} attacks again.`);
         const secondDamageAttack = player.damage();
         console.log(secondDamageAttack);
         const initialDamage = races(opponent, secondDamageAttack);
@@ -281,10 +292,11 @@ function checkMove(player, opponent, move) {
         console.log(opponentDamagePower, opponentDamagePower.chanceDodge);
 
         if (initialDamage.chanceDeflect) {
+          playerLog(`${opponent.name} deflect ${player.name}'s attack again.`);
           const currenthealth = player.currenthealth - initialDamage.damagePower;
           if (currenthealth <= 0) {
             console.log("Gameover!");
-            console.log(`${player.name} lost her life.`);
+            playerLog(`Gameover! ${player.name} lost her life.`);
 
             if (turn === 0) {
               playerOneStatHealth.ariaValueNow = player.currenthealth;
@@ -297,16 +309,18 @@ function checkMove(player, opponent, move) {
             gameOver(isGameOver);
             return;
           } else {
+            playerLog(`${opponent.name} cannot deflect ${player.name}'s attack.`);
             player.currenthealth = currenthealth;
           }
         }
 
         if (!opponentDamagePower.chanceDodge) {
+          playerLog(`${opponent.name} cannot dodge ${player.name}'s attack again.`);
           const currenthealth = opponent.currenthealth - opponentDamagePower.damagePower;
 
           if (currenthealth <= 0) {
             console.log("Gameover!");
-            console.log(`${opponent.name} lost her life.`);
+            playerLog(`Gameover! ${opponent.name} lost her life.`);
 
             if (turn === 0) {
               playerTwoStatHealth.ariaValueNow = opponent.currenthealth;
@@ -331,7 +345,9 @@ function checkMove(player, opponent, move) {
 
         playerTwoStatHealth.ariaValueNow = opponent.currenthealth;
         playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${opponent.currenthealth}%`;
+
         turn = 1;
+
       } else {
         playerOneStatHealth.ariaValueNow = opponent.currenthealth;
         playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${opponent.currenthealth}%`;
@@ -341,13 +357,12 @@ function checkMove(player, opponent, move) {
 
         turn = 0;
       }
-      //starting = 1;
       counter(turn);
       break;
 
     case "2":
       if (player.currenthealth === player.maxHealth) {
-        console.log(`${player.name} current health is still full. Pick another move.`);
+        playerLog(`${player.name} current health is still full. Pick another move.`);
         counter(turn);
 
       } else {
