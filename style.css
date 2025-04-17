@@ -69,7 +69,9 @@ label {
 #startPanel,
 #formPlayer2,
 #formPlayer1,
-#playersVisual {
+#playersVisual,
+#winnerPanel {
+
   display: none;
 }
 #player1Stat,
@@ -77,11 +79,13 @@ label {
   visibility: hidden;
 }
 
-#visual {
+#visual,
+#winnerPanel {
   height: 300px;
 }
 
-#visual img {
+#visual img,
+#winnerPanel img {
   height: 150px;
 }
 

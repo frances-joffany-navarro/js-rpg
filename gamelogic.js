@@ -60,7 +60,7 @@ function counter(turn) {
 
       if (p1CurrentHealth > player1.maxHealth) {
         player1.currenthealth = player1.maxHealth;
-        
+
         playerOneHeal.disabled = true;
         playerOneStatHealth.ariaValueNow = player1.currenthealth;
         playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player1.currenthealth}%`;
@@ -78,7 +78,7 @@ function counter(turn) {
         console.log("Gameover!");
         playerLog(`Gameover! ${player2.name} lost her life.`);
         isGameOver = true;
-        gameOver(isGameOver);
+        gameOver(isGameOver, player1);
       } else {
         player2.currenthealth = p2CurrentHealth;
 
@@ -135,7 +135,7 @@ function counter(turn) {
         console.log("Gameover!");
         playerLog(`Gameover! ${player1.name} lost her life.`);
         isGameOver = true;
-        gameOver(isGameOver);
+        gameOver(isGameOver, player2);
       } else {
         player1.currenthealth = p1CurrentHealth;
         playerOneStatHealth.ariaValueNow = player1.currenthealth;
@@ -230,7 +230,7 @@ function checkMove(player, opponent, move) {
           console.log("Gameover!");
           playerLog(`Gameover! ${player.name} lost her life.`);
           isGameOver = true;
-          gameOver(isGameOver);
+          gameOver(isGameOver, opponent);
           return;
         } else {
           player.currenthealth = currenthealth;
@@ -251,7 +251,7 @@ function checkMove(player, opponent, move) {
           }
 
           isGameOver = true;
-          gameOver(isGameOver);
+          gameOver(isGameOver, player);
           return;
         } else {
           opponent.currenthealth = currenthealth;
@@ -274,7 +274,7 @@ function checkMove(player, opponent, move) {
           }
 
           isGameOver = true;
-          gameOver(isGameOver);
+          gameOver(isGameOver, player);
           return;
         } else {
           opponent.currenthealth = currenthealth;
@@ -306,7 +306,7 @@ function checkMove(player, opponent, move) {
               playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player.currenthealth}%`;
             }
             isGameOver = true;
-            gameOver(isGameOver);
+            gameOver(isGameOver, opponent);
             return;
           } else {
             playerLog(`${opponent.name} cannot deflect ${player.name}'s attack.`);
@@ -331,7 +331,7 @@ function checkMove(player, opponent, move) {
             }
 
             isGameOver = true;
-            gameOver(isGameOver);
+            gameOver(isGameOver, player);
             return;
           } else {
             opponent.currenthealth = currenthealth;
@@ -402,7 +402,7 @@ function checkMove(player, opponent, move) {
     case "3":
       console.log(`${player.name} has surrendered \n${opponent.name} Won!`);
       isGameOver = true;
-      gameOver(isGameOver);
+      gameOver(isGameOver, player);
       break;
 
     default:
@@ -417,7 +417,7 @@ function checkGameOver(player, currenthealth) {
     console.log("Gameover!");
     console.log(`${player.name} lost her life.`);
     isGameOver = true;
-    gameOver(isGameOver);
+    gameOver(isGameOver, opponent);
     return true;
   }
   return false;

@@ -74,6 +74,10 @@ const playerOneStatVisual = document.getElementById("player1Visual");
 const playerTwoStatVisual = document.getElementById("player2Visual");
 
 const gameLog = document.getElementById("logs");
+const winnerPanel = document.getElementById("winnerPanel");
+const winnerName = document.getElementById("winnerName");
+const winnerVisual = document.getElementById("winnerVisual");
+
 
 playerName.focus();
 
@@ -213,17 +217,34 @@ function imageRace(race) {
   return path + srcName;
 }
 
-function gameOver(isGameOver) {
+function gameOver(isGameOver, winner) {
   if (isGameOver) {
-    playerOneAttack.disabled = true;
+    /* playerOneAttack.disabled = true;
     playerOneHeal.disabled = true;
     playerOneYield.disabled = true;
 
     playerTwoAttack.disabled = true;
     playerTwoHeal.disabled = true;
-    playerTwoYield.disabled = true;
+    playerTwoYield.disabled = true; */
+    playerOneAttack.style.display = "none";
+    playerOneHeal.style.display = "none";
+    playerOneYield.style.display = "none";
+
+    playerTwoAttack.style.display = "none";
+    playerTwoHeal.style.display = "none";
+    playerTwoYield.style.display = "none";
+
+    playerOneStat.style.visibility = "hidden";
+    playerTwoStat.style.visibility = "hidden";
+
+    playersVisual.style.display = "none";
+    winnerPanel.style.display = "inline-block";
+    logPanel.style.display = "none";
+    winnerName.innerHTML = `${winner.name} Won!`;
+    winnerVisual.src = imageRace(winner.race);
+
   }
 }
 
 
-export {player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog};
+export { player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog };
