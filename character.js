@@ -34,11 +34,11 @@ function Person(race, item, name) {
   };
 };
 
-let player1;
-let player2;
+let player1 = null;
+let player2 = null;
 let createCounter = 1;
 let starting = false;
-let move;
+let move = null;
 
 const createButton = document.getElementById("createButton");
 const startButton = document.getElementById("startButton");
@@ -77,6 +77,8 @@ const gameLog = document.getElementById("logs");
 const winnerPanel = document.getElementById("winnerPanel");
 const winnerName = document.getElementById("winnerName");
 const winnerVisual = document.getElementById("winnerVisual");
+
+const playAgainButton = document.getElementById("playAgainButton");
 
 
 playerName.focus();
@@ -157,6 +159,19 @@ playerTwoYield.addEventListener("click", () => {
   checkMove(player2, player1, move);
 });
 
+playAgainButton.addEventListener("click", () => {
+  player1 = null;
+  player2 = null;
+  createCounter = 1;
+  starting = false;
+  move = null;
+  //turn = 1;
+
+  creationPanel.style.display = "block";
+  winnerPanel.style.display = "none";
+  playerDesc.innerHTML = "Player 1";
+});
+
 
 
 function createPlayer(race, item, name) {
@@ -219,13 +234,6 @@ function imageRace(race) {
 
 function gameOver(isGameOver, winner) {
   if (isGameOver) {
-    /* playerOneAttack.disabled = true;
-    playerOneHeal.disabled = true;
-    playerOneYield.disabled = true;
-
-    playerTwoAttack.disabled = true;
-    playerTwoHeal.disabled = true;
-    playerTwoYield.disabled = true; */
     playerOneAttack.style.display = "none";
     playerOneHeal.style.display = "none";
     playerOneYield.style.display = "none";
@@ -242,7 +250,7 @@ function gameOver(isGameOver, winner) {
     logPanel.style.display = "none";
     winnerName.innerHTML = `${winner.name} Won!`;
     winnerVisual.src = imageRace(winner.race);
-
+    playerName.focus();
   }
 }
 
