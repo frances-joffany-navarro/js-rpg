@@ -39,6 +39,8 @@ let player2 = null;
 let createCounter = 1;
 let starting = false;
 let move = null;
+let playersTurn = 0;
+let isKO = false;
 
 const createButton = document.getElementById("createButton");
 const startButton = document.getElementById("startButton");
@@ -115,6 +117,7 @@ startButton.addEventListener("click", () => {
   startPanel.style.display = "none";
   logPanel.style.display = "inline-block";
   movesPanel.style.display = "inline-block";
+  movesPanel.style.visibility = "visible";
   playersVisual.style.display = "inline-block";
   playerOneStat.style.visibility = "visible";
   playerTwoStat.style.visibility = "visible";
@@ -127,6 +130,7 @@ startButton.addEventListener("click", () => {
   playerTwoStatItem.src = imageItem(player2.item);
   playerOneStatVisual.src = imageRace(player1.race);
   playerTwoStatVisual.src = imageRace(player2.race);
+  
 });
 
 playerOneAttack.addEventListener("click", () => {
@@ -165,7 +169,8 @@ playAgainButton.addEventListener("click", () => {
   createCounter = 1;
   starting = false;
   move = null;
-  //turn = 1;
+  playersTurn = 0;
+  isKO = false;
 
   creationPanel.style.display = "block";
   winnerPanel.style.display = "none";
@@ -234,13 +239,14 @@ function imageRace(race) {
 
 function gameOver(isGameOver, winner) {
   if (isGameOver) {
-    playerOneAttack.style.display = "none";
+    /* playerOneAttack.style.display = "none";
     playerOneHeal.style.display = "none";
     playerOneYield.style.display = "none";
 
     playerTwoAttack.style.display = "none";
     playerTwoHeal.style.display = "none";
-    playerTwoYield.style.display = "none";
+    playerTwoYield.style.display = "none"; */
+    movesPanel.style.visibility = "hidden";
 
     playerOneStat.style.visibility = "hidden";
     playerTwoStat.style.visibility = "hidden";
@@ -255,4 +261,4 @@ function gameOver(isGameOver, winner) {
 }
 
 
-export { player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog };
+export { player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog, playersTurn, isKO };

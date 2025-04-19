@@ -1,4 +1,4 @@
-import { player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog } from "./character.js";
+import { player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog, playersTurn, isKO } from "./character.js";
 
 //Initialize Temporary Characters
 //const player1 = new Person("human", "bow", "Frances");
@@ -7,9 +7,7 @@ import { player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYi
 //player1.displayChar();
 //player2.displayChar();
 
-let turn = 0;
 
-let isGameOver = false;
 //console.log(player1, player2);
 
 //if (player1 != null && player2 != null) {
@@ -17,8 +15,13 @@ let isGameOver = false;
 
 //  console.log(player1, player2);
 
+
+let turn;
+let isGameOver;
 setTimeout(() => {
   console.log(player1, player2); // 
+  turn = playersTurn;
+  isGameOver = isKO; 
 
   playerOneStatHealth.ariaValueNow = player1.currenthealth;
   playerOneStatHealth.ariaValueMax = player1.maxHealth;
@@ -27,6 +30,7 @@ setTimeout(() => {
   playerTwoStatHealth.ariaValueNow = player2.currenthealth;
   playerTwoStatHealth.ariaValueMax = player2.maxHealth;
   playerTwoStatHealth.style.width = `${player2.currenthealth}%`
+  console.log(turn);
 
   counter(turn);
 }, 20000);
@@ -347,6 +351,7 @@ function checkMove(player, opponent, move) {
         playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${opponent.currenthealth}%`;
 
         turn = 1;
+        console.log(turn)
 
       } else {
         playerOneStatHealth.ariaValueNow = opponent.currenthealth;
