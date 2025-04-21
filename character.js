@@ -124,13 +124,16 @@ startButton.addEventListener("click", () => {
   starting = true;
   playerOneStatName.innerHTML = player1.name;
   playerTwoStatName.innerHTML = player2.name;
-  playerOneStatHealth.innerHTML = `${player1.currenthealth} %`
-  playerTwoStatHealth.innerHTML = `${player2.currenthealth} %`
+  playerOneStatHealth.ariaValueNow = player1.currenthealth;
+  playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player1.currenthealth}%`;
+  playerTwoStatHealth.ariaValueNow = player2.currenthealth;
+  playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player2.currenthealth}%`;
+
   playerOneStatItem.src = imageItem(player1.item);
   playerTwoStatItem.src = imageItem(player2.item);
   playerOneStatVisual.src = imageRace(player1.race);
   playerTwoStatVisual.src = imageRace(player2.race);
-  
+
 });
 
 playerOneAttack.addEventListener("click", () => {
@@ -174,7 +177,12 @@ playAgainButton.addEventListener("click", () => {
 
   creationPanel.style.display = "block";
   winnerPanel.style.display = "none";
+
   playerDesc.innerHTML = "Player 1";
+  playerName.value = "";
+  playerItem.value = "";
+  playerRace.value = "";
+  playerName.focus();
 });
 
 

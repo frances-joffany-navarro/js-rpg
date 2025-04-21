@@ -18,10 +18,13 @@ import { player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYi
 
 let turn;
 let isGameOver;
+console.log(turn, isGameOver);
+
 setTimeout(() => {
   console.log(player1, player2); // 
   turn = playersTurn;
   isGameOver = isKO; 
+  console.log(turn, isGameOver);
 
   playerOneStatHealth.ariaValueNow = player1.currenthealth;
   playerOneStatHealth.ariaValueMax = player1.maxHealth;
@@ -90,9 +93,7 @@ function counter(turn) {
         playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player2.currenthealth}%`;
       }
     }
-
   } else {
-
     playerLog(`${player2.name} turn!`);
     if (player2.currenthealth === player2.maxHealth) {
       playerTwoHeal.disabled = true;
@@ -407,7 +408,7 @@ function checkMove(player, opponent, move) {
     case "3":
       console.log(`${player.name} has surrendered \n${opponent.name} Won!`);
       isGameOver = true;
-      gameOver(isGameOver, player);
+      gameOver(isGameOver, opponent);
       break;
 
     default:
