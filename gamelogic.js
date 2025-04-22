@@ -1,43 +1,7 @@
 import { player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog, playersTurn, isKO } from "./character.js";
 
-//Initialize Temporary Characters
-//const player1 = new Person("human", "bow", "Frances");
-//const player2 = new Person("elf", "boots", "Computer");
-
-//player1.displayChar();
-//player2.displayChar();
-
-
-//console.log(player1, player2);
-
-//if (player1 != null && player2 != null) {
-//if (starting) {
-
-//  console.log(player1, player2);
-
-
-let turn;
-let isGameOver;
-console.log(turn, isGameOver);
-
-setTimeout(() => {
-  console.log(player1, player2); // 
-  turn = playersTurn;
-  isGameOver = isKO; 
-  console.log(turn, isGameOver);
-
-  playerOneStatHealth.ariaValueNow = player1.currenthealth;
-  playerOneStatHealth.ariaValueMax = player1.maxHealth;
-  playerOneStatHealth.style.width = `${player1.currenthealth}%`
-
-  playerTwoStatHealth.ariaValueNow = player2.currenthealth;
-  playerTwoStatHealth.ariaValueMax = player2.maxHealth;
-  playerTwoStatHealth.style.width = `${player2.currenthealth}%`
-  console.log(turn);
-
-  counter(turn);
-}, 20000);
-
+  let turn = 0;
+  let isGameOver = false;
 
 function counter(turn) {
   if (turn == 0) {
@@ -216,6 +180,8 @@ function randomLuck() {
 } */
 
 function checkMove(player, opponent, move) {
+
+
   switch (move) {
     case "1":
       //computing the damage to give to the opponent
@@ -435,4 +401,4 @@ function playerLog(msg) {
   gameLog.appendChild(li);
 }
 
-export { checkMove };
+export { checkMove, counter };

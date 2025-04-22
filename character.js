@@ -1,5 +1,5 @@
 //Use this script to generate your character
-import { checkMove } from "./gamelogic.js";
+import { checkMove , counter} from "./gamelogic.js";
 
 function Person(race, item, name) {
   this.race = race;
@@ -41,6 +41,8 @@ let starting = false;
 let move = null;
 let playersTurn = 0;
 let isKO = false;
+
+
 
 const createButton = document.getElementById("createButton");
 const startButton = document.getElementById("startButton");
@@ -134,6 +136,15 @@ startButton.addEventListener("click", () => {
   playerOneStatVisual.src = imageRace(player1.race);
   playerTwoStatVisual.src = imageRace(player2.race);
 
+  playerOneStatHealth.ariaValueNow = player1.currenthealth;
+  playerOneStatHealth.ariaValueMax = player1.maxHealth;
+  playerOneStatHealth.style.width = `${player1.currenthealth}%`
+
+  playerTwoStatHealth.ariaValueNow = player2.currenthealth;
+  playerTwoStatHealth.ariaValueMax = player2.maxHealth;
+  playerTwoStatHealth.style.width = `${player2.currenthealth}%`
+  
+  counter(playersTurn);
 });
 
 playerOneAttack.addEventListener("click", () => {
@@ -269,4 +280,4 @@ function gameOver(isGameOver, winner) {
 }
 
 
-export { player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog, playersTurn, isKO };
+export { player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog, playersTurn, isKO};
