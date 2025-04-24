@@ -94,6 +94,10 @@ ul {
   padding-left: 0;
   font-family: "Courier New", Courier, monospace;
 }
+
+ul#logs li {
+  border-bottom: #493030
+} 
 #logList {
   height: 385px;
 }

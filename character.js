@@ -194,6 +194,13 @@ playAgainButton.addEventListener("click", () => {
   playerItem.value = "";
   playerRace.value = "";
   playerName.focus();
+
+
+
+while (gameLog.firstChild) {
+  gameLog.removeChild(gameLog.firstChild);
+}
+  
 });
 
 
