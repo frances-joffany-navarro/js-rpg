@@ -138,11 +138,11 @@ startButton.addEventListener("click", () => {
 
   playerOneStatHealth.ariaValueNow = player1.currenthealth;
   playerOneStatHealth.ariaValueMax = player1.maxHealth;
-  playerOneStatHealth.style.width = `${player1.currenthealth}%`
+  playerOneStatHealth.style.width = `${player1.currenthealth}%`;
 
   playerTwoStatHealth.ariaValueNow = player2.currenthealth;
   playerTwoStatHealth.ariaValueMax = player2.maxHealth;
-  playerTwoStatHealth.style.width = `${player2.currenthealth}%`
+  playerTwoStatHealth.style.width = `${player2.currenthealth}%`;
   
   counter(playersTurn);
 });
@@ -258,13 +258,6 @@ function imageRace(race) {
 
 function gameOver(isGameOver, winner) {
   if (isGameOver) {
-    /* playerOneAttack.style.display = "none";
-    playerOneHeal.style.display = "none";
-    playerOneYield.style.display = "none";
-
-    playerTwoAttack.style.display = "none";
-    playerTwoHeal.style.display = "none";
-    playerTwoYield.style.display = "none"; */
     movesPanel.style.visibility = "hidden";
 
     playerOneStat.style.visibility = "hidden";
@@ -280,4 +273,4 @@ function gameOver(isGameOver, winner) {
 }
 
 
-export { player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog, playersTurn, isKO};
+export { player1, player2, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog};

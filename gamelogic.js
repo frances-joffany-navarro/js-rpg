@@ -1,4 +1,4 @@
-import { player1, player2, starting, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, startButton, move, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog, playersTurn, isKO } from "./character.js";
+import { player1, player2,playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog} from "./character.js";
 
   let turn = 0;
   let isGameOver = false;
