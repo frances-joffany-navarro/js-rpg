@@ -1,4 +1,4 @@
-import { player1, player2,playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog} from "./character.js";
+import { player1, player2,playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog, showLogs} from "./character.js";
 
   let turn = 0;
   let isGameOver = false;
@@ -399,6 +399,7 @@ function playerLog(msg) {
   const li = document.createElement("li");
   li.appendChild(document.createTextNode(msg));
   gameLog.appendChild(li);
+  showLogs.scrollTop = showLogs.scrollHeight;
 }
 
 export { checkMove, counter };

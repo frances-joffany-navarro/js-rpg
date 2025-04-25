@@ -84,6 +84,9 @@ const winnerVisual = document.getElementById("winnerVisual");
 
 const playAgainButton = document.getElementById("playAgainButton");
 
+const showLogs = document.getElementById("logList");
+
+
 
 playerName.focus();
 
@@ -195,8 +198,6 @@ playAgainButton.addEventListener("click", () => {
   playerRace.value = "";
   playerName.focus();
 
-
-
 while (gameLog.firstChild) {
   gameLog.removeChild(gameLog.firstChild);
 }
@@ -280,4 +281,4 @@ function gameOver(isGameOver, winner) {
 }
 
 
-export { player1, player2, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog};
+export { player1, player2, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog, showLogs};
