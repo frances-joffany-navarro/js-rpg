@@ -281,4 +281,4 @@ function gameOver(isGameOver, winner) {
 }
 
 
-export { player1, player2, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog, showLogs};
+export { player1, player2, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog, sho};
