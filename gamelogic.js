@@ -1,7 +1,7 @@
-import { player1, player2,playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog, showLogs} from "./character.js";
+import { player1, player2, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog, showLogs, playerOneCurrentHealthPercentage, playerTwoCurrentHealthPercentage } from "./character.js";
 
-  let turn = 0;
-  let isGameOver = false;
+let turn = 0;
+let isGameOver = false;
 
 function counter(turn) {
   if (turn == 0) {
@@ -34,18 +34,18 @@ function counter(turn) {
 
         playerOneHeal.disabled = true;
         playerOneStatHealth.ariaValueNow = player1.currenthealth;
-        playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player1.currenthealth}%`;
+        playerOneStatHealth.style.width = playerOneCurrentHealthPercentage.innerHTML = `${player1.currenthealth}%`;
       } else {
         player1.currenthealth = p1CurrentHealth;
 
         playerOneStatHealth.ariaValueNow = player1.currenthealth;
-        playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player1.currenthealth}%`;
+        playerOneStatHealth.style.width = playerOneCurrentHealthPercentage.innerHTML = `${player1.currenthealth}%`;
       }
 
       if (p2CurrentHealth <= 0) {
         player2.currenthealth = 0;
         playerTwoStatHealth.ariaValueNow = player2.currenthealth;
-        playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player2.currenthealth}%`;
+        playerTwoStatHealth.style.width = playerTwoCurrentHealthPercentage.innerHTML = `${player2.currenthealth}%`;
         console.log("Gameover!");
         playerLog(`Gameover! ${player2.name} lost her life.`);
         isGameOver = true;
@@ -54,7 +54,7 @@ function counter(turn) {
         player2.currenthealth = p2CurrentHealth;
 
         playerTwoStatHealth.ariaValueNow = player2.currenthealth;
-        playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player2.currenthealth}%`;
+        playerTwoStatHealth.style.width = playerTwoCurrentHealthPercentage.innerHTML = `${player2.currenthealth}%`;
       }
     }
   } else {
@@ -85,13 +85,13 @@ function counter(turn) {
 
         playerTwoHeal.disabled = true;
         playerTwoStatHealth.ariaValueNow = player2.currenthealth;
-        playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player2.currenthealth}%`;
+        playerTwoStatHealth.style.width = playerTwoCurrentHealthPercentage.innerHTML = `${player2.currenthealth}%`;
       } else {
 
         player2.currenthealth = p2CurrentHealth;
 
         playerTwoStatHealth.ariaValueNow = player2.currenthealth;
-        playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player2.currenthealth}%`;
+        playerTwoStatHealth.style.width = playerTwoCurrentHealthPercentage.innerHTML = `${player2.currenthealth}%`;
       }
 
       if (p1CurrentHealth <= 0) {
@@ -99,7 +99,7 @@ function counter(turn) {
         p1CurrentHealth = 0;
 
         playerOneStatHealth.ariaValueNow = player1.currenthealth;
-        playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player1.currenthealth}%`;
+        playerOneStatHealth.style.width = playerOneCurrentHealthPercentage.innerHTML = `${player1.currenthealth}%`;
 
         console.log("Gameover!");
         playerLog(`Gameover! ${player1.name} lost her life.`);
@@ -108,7 +108,7 @@ function counter(turn) {
       } else {
         player1.currenthealth = p1CurrentHealth;
         playerOneStatHealth.ariaValueNow = player1.currenthealth;
-        playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player1.currenthealth}%`;
+        playerOneStatHealth.style.width = playerOneCurrentHealthPercentage.innerHTML = `${player1.currenthealth}%`;
       }
     }
   }
@@ -215,10 +215,10 @@ function checkMove(player, opponent, move) {
 
           if (turn === 0) {
             playerTwoStatHealth.ariaValueNow = opponent.currenthealth;
-            playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${opponent.currenthealth}%`;
+            playerTwoStatHealth.style.width = playerTwoCurrentHealthPercentage.innerHTML = `${opponent.currenthealth}%`;
           } else {
             playerOneStatHealth.ariaValueNow = opponent.currenthealth;
-            playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${opponent.currenthealth}%`;
+            playerOneStatHealth.style.width = playerOneCurrentHealthPercentage.innerHTML = `${opponent.currenthealth}%`;
           }
 
           isGameOver = true;
@@ -238,10 +238,10 @@ function checkMove(player, opponent, move) {
 
           if (turn === 0) {
             playerTwoStatHealth.ariaValueNow = opponent.currenthealth;
-            playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${opponent.currenthealth}%`;
+            playerTwoStatHealth.style.width = playerTwoCurrentHealthPercentage.innerHTML = `${opponent.currenthealth}%`;
           } else {
             playerOneStatHealth.ariaValueNow = opponent.currenthealth;
-            playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${opponent.currenthealth}%`;
+            playerOneStatHealth.style.width = playerOneCurrentHealthPercentage.innerHTML = `${opponent.currenthealth}%`;
           }
 
           isGameOver = true;
@@ -271,10 +271,10 @@ function checkMove(player, opponent, move) {
 
             if (turn === 0) {
               playerOneStatHealth.ariaValueNow = player.currenthealth;
-              playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player.currenthealth}%`;
+              playerOneStatHealth.style.width = playerOneCurrentHealthPercentage.innerHTML = `${player.currenthealth}%`;
             } else {
               playerTwoStatHealth.ariaValueNow = player.currenthealth;
-              playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player.currenthealth}%`;
+              playerTwoStatHealth.style.width = playerTwoCurrentHealthPercentage.innerHTML = `${player.currenthealth}%`;
             }
             isGameOver = true;
             gameOver(isGameOver, opponent);
@@ -295,10 +295,10 @@ function checkMove(player, opponent, move) {
 
             if (turn === 0) {
               playerTwoStatHealth.ariaValueNow = opponent.currenthealth;
-              playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${opponent.currenthealth}%`;
+              playerTwoStatHealth.style.width = playerTwoCurrentHealthPercentage.innerHTML = `${opponent.currenthealth}%`;
             } else {
               playerOneStatHealth.ariaValueNow = opponent.currenthealth;
-              playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${opponent.currenthealth}%`;
+              playerOneStatHealth.style.width = playerOneCurrentHealthPercentage.innerHTML = `${opponent.currenthealth}%`;
             }
 
             isGameOver = true;
@@ -312,20 +312,20 @@ function checkMove(player, opponent, move) {
 
       if (turn === 0) {
         playerOneStatHealth.ariaValueNow = player.currenthealth;
-        playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player.currenthealth}%`;
+        playerOneStatHealth.style.width = playerOneCurrentHealthPercentage.innerHTML = `${player.currenthealth}%`;
 
         playerTwoStatHealth.ariaValueNow = opponent.currenthealth;
-        playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${opponent.currenthealth}%`;
+        playerTwoStatHealth.style.width = playerTwoCurrentHealthPercentage.innerHTML = `${opponent.currenthealth}%`;
 
         turn = 1;
         console.log(turn)
 
       } else {
         playerOneStatHealth.ariaValueNow = opponent.currenthealth;
-        playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${opponent.currenthealth}%`;
+        playerOneStatHealth.style.width = playerOneCurrentHealthPercentage.innerHTML = `${opponent.currenthealth}%`;
 
         playerTwoStatHealth.ariaValueNow = player.currenthealth;
-        playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player.currenthealth}%`;
+        playerTwoStatHealth.style.width = playerTwoCurrentHealthPercentage.innerHTML = `${player.currenthealth}%`;
 
         turn = 0;
       }
@@ -357,12 +357,12 @@ function checkMove(player, opponent, move) {
         //change turn and apply currenthealth to player health stat accordingly
         if (turn === 0) {
           playerOneStatHealth.ariaValueNow = player.currenthealth;
-          playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player.currenthealth}%`;
+          playerOneStatHealth.style.width = playerOneCurrentHealthPercentage.innerHTML = `${player.currenthealth}%`;
 
           turn = 1;
         } else {
           playerTwoStatHealth.ariaValueNow = player.currenthealth;
-          playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player.currenthealth}%`;
+          playerTwoStatHealth.style.width = playerTwoCurrentHealthPercentage.innerHTML = `${player.currenthealth}%`;
 
           turn = 0;
         }

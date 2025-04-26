@@ -1,5 +1,5 @@
 //Use this script to generate your character
-import { checkMove , counter} from "./gamelogic.js";
+import { checkMove, counter } from "./gamelogic.js";
 
 function Person(race, item, name) {
   this.race = race;
@@ -76,6 +76,8 @@ const playerOneStatItem = document.getElementById("itemImage1");
 const playerTwoStatItem = document.getElementById("itemImage2");
 const playerOneStatVisual = document.getElementById("player1Visual");
 const playerTwoStatVisual = document.getElementById("player2Visual");
+const playerOneCurrentHealthPercentage = document.getElementById("p1CurrentHealthPercentage");
+const playerTwoCurrentHealthPercentage = document.getElementById("p2CurrentHealthPercentage");
 
 const gameLog = document.getElementById("logs");
 const winnerPanel = document.getElementById("winnerPanel");
@@ -130,23 +132,25 @@ startButton.addEventListener("click", () => {
   playerOneStatName.innerHTML = player1.name;
   playerTwoStatName.innerHTML = player2.name;
   playerOneStatHealth.ariaValueNow = player1.currenthealth;
-  playerOneStatHealth.style.width = playerOneStatHealth.innerHTML = `${player1.currenthealth}%`;
+  playerOneStatHealth.ariaValueMax = player1.maxHealth;
+  playerOneStatHealth.style.width = playerOneCurrentHealthPercentage.innerHTML = `${player1.currenthealth}%`;
   playerTwoStatHealth.ariaValueNow = player2.currenthealth;
-  playerTwoStatHealth.style.width = playerTwoStatHealth.innerHTML = `${player2.currenthealth}%`;
+  playerTwoStatHealth.ariaValueMax = player2.maxHealth;
+  playerTwoStatHealth.style.width = playerTwoCurrentHealthPercentage.innerHTML = `${player2.currenthealth}%`;
 
   playerOneStatItem.src = imageItem(player1.item);
   playerTwoStatItem.src = imageItem(player2.item);
   playerOneStatVisual.src = imageRace(player1.race);
   playerTwoStatVisual.src = imageRace(player2.race);
 
-  playerOneStatHealth.ariaValueNow = player1.currenthealth;
+  /* playerOneStatHealth.ariaValueNow = player1.currenthealth;
   playerOneStatHealth.ariaValueMax = player1.maxHealth;
   playerOneStatHealth.style.width = `${player1.currenthealth}%`;
 
   playerTwoStatHealth.ariaValueNow = player2.currenthealth;
   playerTwoStatHealth.ariaValueMax = player2.maxHealth;
-  playerTwoStatHealth.style.width = `${player2.currenthealth}%`;
-  
+  playerTwoStatHealth.style.width = `${player2.currenthealth}%`; */
+
   counter(playersTurn);
 });
 
@@ -198,10 +202,10 @@ playAgainButton.addEventListener("click", () => {
   playerRace.value = "";
   playerName.focus();
 
-while (gameLog.firstChild) {
-  gameLog.removeChild(gameLog.firstChild);
-}
-  
+  while (gameLog.firstChild) {
+    gameLog.removeChild(gameLog.firstChild);
+  }
+
 });
 
 
@@ -281,4 +285,4 @@ function gameOver(isGameOver, winner) {
 }
 
 
-export { player1, player2, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog, sho};
+export { player1, player2, playerOneAttack, playerOneHeal, playerOneYield, playerTwoAttack, playerTwoHeal, playerTwoYield, gameOver, playerOneStatHealth, playerTwoStatHealth, gameLog, showLogs, playerOneCurrentHealthPercentage, playerTwoCurrentHealthPercentage };
