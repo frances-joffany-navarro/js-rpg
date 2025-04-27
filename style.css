@@ -14,6 +14,15 @@ body {
   text-align: center;
 }
 
+h1 {
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+/* .setting-button {
+  margin: 0;
+} */
+
 .playerName {
   font-size: 28px;
 }
@@ -71,7 +80,6 @@ label {
 #formPlayer1,
 #playersVisual,
 #winnerPanel {
-
   display: none;
 }
 #player1Stat,
@@ -96,8 +104,8 @@ ul {
 }
 
 ul#logs li {
-  border-bottom: #493030
-} 
+  border-bottom: #493030;
+}
 #logList {
   height: 385px;
 }

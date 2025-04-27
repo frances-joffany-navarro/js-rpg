@@ -13,19 +13,53 @@
   <link rel="stylesheet" href="style.css">
   <script type="module" src="character.js"></script>
   <script type="module" src="gamelogic.js"></script>
+  <script src="https://kit.fontawesome.com/4e2f2a9e6a.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="selector-for-some-widget">
 
   <main class="container mx-auto">
-    <header>
-      <h1 class="center">Becodian RPG</h1>
-      <!-- <span>
-        <audio controls autoplay muted loop>
-          <source src="./images/little-slimex27s-adventure-151007.mp3" type="audio/mpeg">
-          Music by <a href="https://pixabay.com/users/spencer_yk-36670691/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=151007">Spencer Y.K.</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=151007">Pixabay</a>
-        </audio>
-      </span> -->
+    <header class=" mb-3">
+      <div class="align-middle">
+        <h1 class="center">Becodian RPG</h1>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary setting-button" data-toggle="modal"
+          data-target="#settingsModalCenter">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="settingsModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="settingsModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="settingsModalLongTitle">Settings</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body center">
+              <audio controls autoplay muted loop>
+                <source src="./images/little-slimex27s-adventure-151007.mp3" type="audio/mpeg">
+                Music by <a
+                  href="https://pixabay.com/users/spencer_yk-36670691/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=151007">Spencer
+                  Y.K.</a> from <a
+                  href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=151007">Pixabay</a>
+              </audio>
+            </div>
+            <div class="modal-footer">
+              <p>Music by <a
+                  href="https://pixabay.com/users/spencer_yk-36670691/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=151007">Spencer
+                  Y.K.</a> from <a
+                  href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=151007">Pixabay</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
     <div class="row">
       <!--Create and Log Panel-->
