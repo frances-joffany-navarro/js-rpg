@@ -23,6 +23,15 @@ h1 {
   margin: 0;
 } */
 
+.navbar {
+  background: rgba(220, 255, 254, 0.5);
+  color: black;
+}
+a.navbar-brand,
+a.nav-link{
+  color: black;
+}
+
 .playerName {
   font-size: 28px;
 }

@@ -19,16 +19,22 @@
 <body class="selector-for-some-widget">
 
   <main class="container mx-auto">
-    <header class=" mb-3">
-      <div class="align-middle">
-        <h1 class="center">Becodian RPG</h1>
-
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary setting-button" data-toggle="modal"
-          data-target="#settingsModalCenter">
-          <i class="fa-solid fa-bars"></i>
+    <header class="mb-3">
+      <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="#">Becodian RPG</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
-      </div>
+
+        <div class="collapse navbar-collapse float-right" id="navbarSupportedContent">
+          <span class="navbar-text">
+            <a class="nav-link" data-toggle="modal" data-target="#settingsModalCenter" href="#"><i class="fa-solid fa-gear fa-lg"></i><span
+                class="sr-only">(current)</span></a>
+          </span>
+          </ul>
+        </div>
+      </nav>
 
       <!-- Modal -->
       <div class="modal fade" id="settingsModalCenter" tabindex="-1" role="dialog"
@@ -42,7 +48,7 @@
               </button>
             </div>
             <div class="modal-body center">
-              <audio controls autoplay muted loop>
+              <audio controls autoplay loop>
                 <source src="./images/little-slimex27s-adventure-151007.mp3" type="audio/mpeg">
                 Music by <a
                   href="https://pixabay.com/users/spencer_yk-36670691/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=151007">Spencer
